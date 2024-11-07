@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,36 @@ namespace BusinessLayer.Concrete
 {
     public class TestimonialManager : IGenericService<Testimonial>
     {
+        ITestimonialDAL _testimonialDAL;
+
+        public TestimonialManager(ITestimonialDAL testimonialDAL)
+        {
+            _testimonialDAL = testimonialDAL;
+        }
+
         public void TAdd(Testimonial t)
         {
-            throw new NotImplementedException();
+            _testimonialDAL.Insert(t);
         }
 
         public void TDelete(Testimonial t)
         {
-            throw new NotImplementedException();
+           _testimonialDAL.Delete(t);
         }
 
         public Testimonial TGetBYID(int id)
         {
-            throw new NotImplementedException();
+            return _testimonialDAL.GetById(id);
         }
 
         public List<Testimonial> TGetList()
         {
-            throw new NotImplementedException();
+            return _testimonialDAL.GetList();
         }
 
         public void TUpdate(Testimonial t)
         {
-            throw new NotImplementedException();
+          _testimonialDAL.Update(t);
         }
     }
 }
