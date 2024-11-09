@@ -1,0 +1,12 @@
+﻿@using EntityLayer.Concrete
+@model List<SocialMedia>
+
+    @foreach(var item in Model)
+{
+    if(item.Status==true)
+    {
+        <li class="nav-item"><a class="nav-link" href="@item.Url" target="_blank" title="@item.Content"><i class="@item.Icon"></i><span class="menu-title sr-only">@item.Content</span></a></li>
+    }
+   
+}
+
