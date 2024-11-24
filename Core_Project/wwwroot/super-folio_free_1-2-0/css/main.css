@@ -269,3 +269,29 @@ footer a:not(.nav-link) {
 .entry-title a {
   text-decoration: none;
 }
+.aimage {
+    position: relative;
+    width: 50%;
+}
+
+.imagef {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlayf {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFB900;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.aimage:hover .overlayf {
+    height: 100%;
+}

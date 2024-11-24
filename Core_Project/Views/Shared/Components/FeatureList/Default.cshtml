@@ -1,10 +1,15 @@
 ﻿@using EntityLayer.Concrete
 @model List<Feature>
+
 <header>
     <div class="cover bg-light">
         <div class="container px-3">
             <div class="row">
-                <div class="col-lg-6 p-2"><img class="img-fluid" src="~/super-folio_free_1-2-0/images/software-engineer.png" alt="hello" /></div>
+                <div class="col-lg-6 p-2 aimage">
+                    <img class="img-fluid rounded-3 imagef" src="~/super-folio_free_1-2-0/images/image0_0.jpg" alt="hello" />
+                    <div class="overlayf">
+                    </div>
+                </div>
                 <div class="col-lg-6">
                     <div class="mt-5">
                         @foreach(var item in Model)

@@ -3,9 +3,42 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 <!-- upto 2 directory depth-->
 <html lang="en-US">
+    <style>
+    .aimage {
+        position: relative;
+        width: 50%;
+    }
+
+    .imagef {
+        display: block;
+        width: 100%;
+        
+    }
+
+    .overlayf {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: url("https://i.pinimg.com/originals/06/60/ef/0660efe82fa3da42ed56eef013171835.gif");
+        overflow: hidden;
+        width: 99%;
+        height: 0;
+        transition: 1.5s ease;
+        border-radius:15px;
+      
+        
+    }
+
+    .aimage:hover .overlayf {
+        height: 100%;
+    }
+
+    </style>
 
 @await Html.PartialAsync("HeaderPartial")
 
@@ -29,7 +62,7 @@
                     <div class="row">
 
 
-                        @await Component.InvokeAsync("SendMessage")
+                        @await Html.PartialAsync("SendMessage")
                         @await Component.InvokeAsync("ContactList")
 
                     </div>
@@ -44,8 +77,8 @@
             <footer class="pt-4 pb-4 text-center bg-light">
                 <div class="container">
                     <div class="my-3">
-                        <div class="h4">Walter Patterson</div>
-                        <p>Web Developer & Mobile Application Developer</p>
+                        <div class="h4">Süleyman Meral</div>
+                        <p>Software Engineer - .NET Developer </p>
                         <div class="social-nav">
                             <nav role="navigation">
                                 <ul class="nav justify-content-center">
