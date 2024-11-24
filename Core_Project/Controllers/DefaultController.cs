@@ -20,6 +20,14 @@ namespace Core_Project.Controllers
         {
             return PartialView();
         }
+        public PartialViewResult FooterPartial()
+        {
+            return PartialView();
+        }
+        public PartialViewResult ScriptsPartial()
+        {
+            return PartialView();
+        }
         [HttpGet]
         public PartialViewResult SendMessage()
         {
