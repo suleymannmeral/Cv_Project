@@ -10,12 +10,15 @@ namespace Core_Project.Controllers
         SkillManager skillManager = new SkillManager(new EFSkillDAL());
         public IActionResult Index()
         {
+            ViewBag.d1 = "Skills";
+
             var values = skillManager.TGetList();
             return View(values);
         }
         [HttpGet]
         public IActionResult AddSkill()
         {
+            ViewBag.d1 = "Add Skill";
            
             return View();
         }
@@ -32,6 +35,22 @@ namespace Core_Project.Controllers
             skillManager.TDelete(values);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult EditSkill(int id)
+        {
+            ViewBag.d1 = "Edit Skill";
+
+            var values = skillManager.TGetBYID(id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public IActionResult EditSkill(Skill skill)
+        {
+            skillManager.TUpdate(skill);
+            return RedirectToAction("Index");
+        }
+
 
 
 

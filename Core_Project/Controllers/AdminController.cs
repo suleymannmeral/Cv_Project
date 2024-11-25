@@ -22,6 +22,7 @@ namespace Core_Project.Controllers
         }
         public PartialViewResult PartialNavbar()
         {
+
             return PartialView();
         }
     }
