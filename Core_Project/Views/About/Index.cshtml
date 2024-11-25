@@ -1,0 +1,86 @@
+﻿@using EntityLayer.Concrete
+@model List<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="card-header border-0">
+    <h3 class="mb-0">About Me </h3>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Age</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        <div class="media align-items-center">
+                            <a href="#" class="avatar rounded-circle">
+                                <img alt="Image placeholder" src="@item.ImageUrl">
+                            </a>
+
+                        </div>
+                    </td>
+                    <td>
+                        @item.AboutID
+                    </td>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Description?.Substring(0,30).....
+
+                    </td>
+                    <td>
+                        @item.Age
+
+                    </td>
+                    <td>
+                        @item.Mail
+
+                    </td>
+                    <td>
+                        @item.Phone
+
+                    </td>
+                    <td>
+                        @item.Adress
+
+                    </td>
+              
+
+
+
+                 
+                    <td>
+                        <a href="/About/EditAbout/@item.AboutID" class="btn btn-warning">Edit</a>
+
+
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+    <br />
+
+</div>

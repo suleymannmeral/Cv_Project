@@ -1,4 +1,10 @@
-﻿<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+﻿
+@using Azure.Core
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Http
+
+
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +95,7 @@
             </form>
             <!-- Navigation -->
             <ul class="navbar-nav">
-                <li class="nav-item  active ">
+                <li class="nav-item   ">
                     <a class="nav-link " href="../index.html">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
@@ -100,13 +106,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active " href="/Skill/Index">
+                    <a class="nav-link   " href="/Skill/Index">
                         <i class="ni ni-chart-bar-32"></i> Skills
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="../examples/profile.html">
-                        <i class="ni ni-single-02 text-yellow"></i> User profile
+                    <a class="nav-link" href="/Education/Index">
+                        <i class="ni ni-single-02 text-yellow"></i> Education
                     </a>
                 </li>
                 <li class="nav-item">
