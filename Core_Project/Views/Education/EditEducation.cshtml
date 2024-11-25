@@ -1,0 +1,36 @@
+﻿@model EntityLayer.Concrete.Education
+@{
+    ViewData["Title"] = "EditEducation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h1>@ViewBag.v1</h1>
+
+@using (Html.BeginForm("EditEducation", "Education", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.EducationID)
+    <br />
+    @Html.Label("Title")
+    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    <br />
+    <label>Education Title</label>
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    <label>Date</label>
+    @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+    <br />
+    <label>Image URL</label>
+    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+    <br />
+
+    <label>Description</label>
+    @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success">Update</button>
+
+
+}
+
+
+
+
+
