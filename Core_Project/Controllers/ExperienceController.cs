@@ -32,5 +32,14 @@ namespace Core_Project.Controllers
 
 
         }
+        public IActionResult DeleteExperience(int id)
+        {
+            var values = experienceManager.TGetBYID(id);
+            experienceManager.TDelete(values);
+            return RedirectToAction("Index");
+
+
+
+        }
     }
 }
