@@ -41,5 +41,21 @@ namespace Core_Project.Controllers
 
 
         }
+        [HttpGet]
+        public IActionResult EditExperience(int id)
+        {
+            ViewBag.d1 = "Edit Experience";
+
+            var values = experienceManager.TGetBYID(id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public IActionResult EditExperience(Experience experience)
+        {
+            experienceManager.TUpdate(experience);
+            return RedirectToAction("Index");
+        }
+
     }
 }
