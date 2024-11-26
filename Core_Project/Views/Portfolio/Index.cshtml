@@ -1,0 +1,89 @@
+﻿@using EntityLayer.Concrete
+@model List<Portfolio>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row mt-5">
+    <div class="col">
+        <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+                <h3 class="text-white mb-0">My Portfolio</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center table-dark table-flush">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Project</th>
+                            <th scope="col">Budget</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Images</th>
+                            <th scope="col">Completion</th>
+                            <th scope="col">Delete</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <a href="@item.ProjectLink" target="_blank" class="avatar rounded-circle mr-3">
+                                            <img alt="Image placeholder" src="@item.ImageUrl3">
+                                        </a>
+                                        <div class="media-body">
+                                            <span class="mb-0 text-sm">@item.Name</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td>
+                                    @item.Budget ₺
+                                </td>
+                                <td>
+                                    <span class="badge badge-dot mr-4">
+
+                                        <i class="bg-@(item.Status ? "success" : "warning")"></i> @(item.Status ? "Completed" : "Pending")
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="avatar-group">
+                                        <a href="@item.ImageUrl1" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                                            <img alt="Image placeholder" src="@item.ImageUrl" class="rounded-circle">
+                                        </a>
+                                        <a href="@item.ImageUrl2" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                                            <img alt="Image placeholder" src="@item.ImageUrl2" class="rounded-circle">
+                                        </a>
+                                    
+                                      
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="mr-2">@item.Completion%</span>
+                                        <div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-@(item.Completion==100 ? "success" :"warning")" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @item.Completion%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                   
+                 
+                    
+                    </tbody>
+                </table>
+            
+            </div>
+          
+            <a href="/Portfolio/AddPortfolio" class="btn btn-danger">Add Portfolio</a>
+        </div>
+    </div>
+</div>
+
