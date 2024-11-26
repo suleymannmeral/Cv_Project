@@ -26,5 +26,24 @@ namespace Core_Project.Controllers
             portgolioManager.TAdd(portfolio);
             return RedirectToAction("Index");
         }
+
+        public IActionResult DeletePortfolio(int id)
+        {
+            var values= portgolioManager.TGetBYID(id);
+            portgolioManager.TDelete(values);
+           return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult EditPortfolio(int id)
+        {
+            var values = portgolioManager.TGetBYID(id);
+            return View(values);
+        }
+        [HttpPost]
+        public IActionResult EditPortfolio(Portfolio portfolio)
+        {
+            portgolioManager.TUpdate(portfolio);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Http
 
 
+
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
@@ -96,17 +97,26 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item   ">
-                    <a class="nav-link " href="/Experience/Index">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Experience" &&
+      ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+        ? "active"
+        : "") " href="/Experience/Index">
                         <i class="ni ni-tv-2 text-primary"></i> Experience
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/About/Index">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "About" &&
+      ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+        ? "active"
+        : "") " href="/About/Index">
                         <i class="fas fa-chart-pie"></i> About Me
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link   " href="/Skill/Index">
+                    <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Skill" &&
+      ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+        ? "active"
+        : "")   " href="/Skill/Index">
                         <i class="ni ni-chart-bar-32"></i> Skills
                     </a>
                 </li>

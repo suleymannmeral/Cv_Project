@@ -1,0 +1,45 @@
+﻿@model EntityLayer.Concrete.Portfolio
+@{
+    ViewData["Title"] = "EditPortfolio";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1>@ViewBag.v1</h1>
+
+@using (Html.BeginForm("EditPortfolio", "Portfolio", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.PortfolioID)
+    <br />
+    @Html.Label("Project Title")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    <label>Budget</label>
+    @Html.TextBoxFor(x => x.Budget, new { @class = "form-control" })
+    <br />
+    <label>Completion</label>
+    @Html.TextBoxFor(x => x.Completion, new { @class = "form-control" })
+    <br />
+    <label>Project Logo</label>
+    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+    <br />
+    <label>Project Image (1)</label>
+    @Html.TextBoxFor(x => x.ImageUrl1, new { @class = "form-control" })
+    <br />
+    <label>Project Image (2)</label>
+    @Html.TextBoxFor(x => x.ImageUrl2, new { @class = "form-control" })
+    <br />
+    <label>Project Platform Image</label>
+    @Html.TextBoxFor(x => x.ImageUrl3, new { @class = "form-control" })
+    <br />
+
+
+
+
+
+    <button class="btn btn-success">Update</button>
+
+
+}
+
+
