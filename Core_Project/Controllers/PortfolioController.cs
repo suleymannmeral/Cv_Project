@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Controllers
@@ -23,8 +25,23 @@ namespace Core_Project.Controllers
         [HttpPost]
         public IActionResult AddPortfolio(Portfolio portfolio)
         {
-            portgolioManager.TAdd(portfolio);
-            return RedirectToAction("Index");
+            PortfolioValidator validationRules = new PortfolioValidator();
+            ValidationResult results=validationRules.Validate(portfolio);
+            if (results.IsValid)
+            {
+                portgolioManager.TAdd(portfolio);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
+            
+           
         }
 
         public IActionResult DeletePortfolio(int id)

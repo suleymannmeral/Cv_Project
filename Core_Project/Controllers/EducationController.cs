@@ -1,6 +1,9 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Controllers
@@ -25,8 +28,23 @@ namespace Core_Project.Controllers
         [HttpPost]
         public IActionResult AddEducation(Education education)
         {
-            educationManager.TAdd(education);
-            return RedirectToAction("Index");
+            
+            EducationValidator validationRules = new EducationValidator();
+            ValidationResult results = validationRules.Validate(education);
+            if (results.IsValid)
+            {
+                educationManager.TAdd(education);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
+
         }
         public IActionResult DeleteEducation(int id)
         {
