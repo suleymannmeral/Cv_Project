@@ -11,9 +11,13 @@
     <br />
     @Html.Label("Service Title")
     @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
     <br />
     <label>Image URL</label>
     @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger custom-class" })
+
     <br />
 
     <button class="btn btn-success">Update</button>

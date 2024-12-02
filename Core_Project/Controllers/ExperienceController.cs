@@ -69,8 +69,22 @@ namespace Core_Project.Controllers
         [HttpPost]
         public IActionResult EditExperience(Experience experience)
         {
-            experienceManager.TUpdate(experience);
-            return RedirectToAction("Index");
+          
+            ExperienceValidator validationRules = new ExperienceValidator();
+            ValidationResult results = validationRules.Validate(experience);
+            if (results.IsValid)
+            {
+                experienceManager.TUpdate(experience);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
         }
 
     }

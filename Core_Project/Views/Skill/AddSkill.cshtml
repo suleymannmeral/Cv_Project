@@ -1,4 +1,4 @@
-﻿
+﻿@model EntityLayer.Concrete.Skill
 @{
     ViewData["Title"] = "AddSkill";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -12,14 +12,21 @@
     <div class="form-group">
         <label for="exampleInputEmail1">Skill Title</label>
         <input type="text" class="form-control" id="exampleInputEmail1" name="Title" placeholder="Skill Title">
+        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Skill Value</label>
         <input type="text" class="form-control" id="exampleInputPassword1" name="Value" placeholder="Value">
+        @Html.ValidationMessageFor(x => x.Value, null, new { @class = "text-danger custom-class" })
+
+
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Icon URL</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" name="imageUrl" placeholder="Value">
+        <input type="text" class="form-control" id="exampleInputPassword1" name="imageUrl" placeholder="Icon URL">
+        @Html.ValidationMessageFor(x => x.imageUrl, null, new { @class = "text-danger custom-class" })
+
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>

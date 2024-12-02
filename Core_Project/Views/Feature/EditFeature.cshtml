@@ -1,0 +1,35 @@
+﻿@model EntityLayer.Concrete.Feature
+@{
+    ViewData["Title"] = "EditFeature";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("EditFeature", "Feature", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.FeatureID)
+    <br />
+    @Html.Label("Header")
+    @Html.TextBoxFor(x => x.Header, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Header, null, new { @class = "text-danger custom-class" })
+
+    <br />
+    <label>Name</label>
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger custom-class" })
+
+    <br />
+    <label>Title</label>
+    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
+    <br />
+  
+
+    <button class="btn btn-success">Update</button>
+
+
+}
+
+
+

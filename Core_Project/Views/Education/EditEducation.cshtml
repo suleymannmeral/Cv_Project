@@ -11,19 +11,29 @@
     <br />
     @Html.Label("Title")
     @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
     <br />
     <label>Education Title</label>
     @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger custom-class" })
+
     <br />
     <label>Date</label>
     @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Date, null, new { @class = "text-danger custom-class" })
+
     <br />
     <label>Image URL</label>
     @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger custom-class" })
+
     <br />
 
     <label>Description</label>
     @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger custom-class" })
+
     <br />
     <button class="btn btn-success">Update</button>
 

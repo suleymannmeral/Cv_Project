@@ -1,4 +1,4 @@
-﻿
+﻿@model EntityLayer.Concrete.Service
 @{
     ViewData["Title"] = "AddService";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -13,11 +13,15 @@
     <div class="form-group">
         <label for="exampleInputEmail1">Skill Title</label>
         <input type="text" class="form-control" id="exampleInputEmail1" name="Title" placeholder="Service Title">
+        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
     </div>
    
     <div class="form-group">
         <label for="exampleInputPassword1">Icon URL</label>
         <input type="text" class="form-control" id="exampleInputPassword1" name="imageUrl" placeholder="Image URL">
+        @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger custom-class" })
+
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>

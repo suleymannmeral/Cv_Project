@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Controllers
@@ -22,8 +24,23 @@ namespace Core_Project.Controllers
         [HttpPost]
         public IActionResult AddService(Service service)
         {
-            serviceManager.TAdd(service);
-            return RedirectToAction("Index");  
+          
+            ServicesValidator validationRules = new ServicesValidator();
+            ValidationResult results = validationRules.Validate(service);
+            if (results.IsValid)
+            {
+                serviceManager.TAdd(service);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
+
         }
         public IActionResult DeleteService(int id)
         {
@@ -41,8 +58,23 @@ namespace Core_Project.Controllers
         [HttpPost]
         public IActionResult EditService(Service service)
         {
-            serviceManager.TUpdate(service);
-            return RedirectToAction("Index");
+         
+
+            ServicesValidator validationRules = new ServicesValidator();
+            ValidationResult results = validationRules.Validate(service);
+            if (results.IsValid)
+            {
+                serviceManager.TUpdate(service);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
         }
     }
 }

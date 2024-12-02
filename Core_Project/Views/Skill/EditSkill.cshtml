@@ -12,12 +12,18 @@
     <br />
     @Html.Label("Yetenek Başlığı")
     @Html.TextBoxFor(x => x.Title,new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
     <br />
     <label>Value</label>
     @Html.TextBoxFor(x => x.Value, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Value, null, new { @class = "text-danger custom-class" })
+
     <br />
     <label>Image URL</label>
     @Html.TextBoxFor(x => x.imageUrl, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.imageUrl, null, new { @class = "text-danger custom-class" })
+
     <br />
     <button class="btn btn-success">Update</button>
 
