@@ -24,6 +24,11 @@
     @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
 
     <br />
+    <label>IMAGE URL</label>
+    @Html.TextBoxFor(x => x.FeatureImage, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.FeatureImage, null, new { @class = "text-danger custom-class" })
+
+    <br />
   
 
     <button class="btn btn-success">Update</button>
