@@ -1,21 +1,21 @@
 ﻿@model EntityLayer.Concrete.Service
 @{
     ViewData["Title"] = "EditService";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
-<h1>@ViewBag.v1</h1>
+<h1 class="text-white text-center">@ViewBag.tt</h1>
 
 @using (Html.BeginForm("EditService", "Services", FormMethod.Post))
 {
     @Html.HiddenFor(x => x.ServiceID)
     <br />
     @Html.Label("Service Title")
-    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Title, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
 
     <br />
     <label>Image URL</label>
-    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger custom-class" })
 
     <br />

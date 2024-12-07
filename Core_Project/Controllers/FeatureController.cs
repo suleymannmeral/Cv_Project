@@ -12,6 +12,7 @@ namespace Core_Project.Controllers
         FeatureManager featureManager = new FeatureManager(new EFFeatureDAL());
         public IActionResult Index()
         {
+            ViewBag.tt = "Feature List Table";
             var values = featureManager.TGetList();
             return View(values);
         }
@@ -19,6 +20,7 @@ namespace Core_Project.Controllers
         [HttpGet]
         public IActionResult EditFeature(int id)
         {
+            ViewBag.tt = "Edit Feature Page";
             var values = featureManager.TGetBYID(id);
             return View(values);
 

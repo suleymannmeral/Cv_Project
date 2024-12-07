@@ -9593,7 +9593,7 @@ fieldset:disabled .wizard > .actions a,
       box-shadow: 0 0 0 0.2rem rgba(0, 210, 91, 0.5); }
 
 .btn-outline-info {
-  color: #8f5fe8;
+  color: #ffb900;
   border-color: #8f5fe8; }
   .btn-outline-info:hover {
     color: #fff;
@@ -15409,7 +15409,7 @@ span {
   text-shadow: none; }
 
 [type=button]:focus,
-a:active,
+a,
 a:focus,
 a:visited,
 button::-moz-focus-inner,
@@ -16501,7 +16501,7 @@ code {
   .show > .btn-inverse-danger.dropdown-toggle {
     color: #ffffff;
     background-color: #fc424a;
-    border-color: #fc424a; }
+    border-color: #fc424a; }F
 
 .btn-danger:not(.btn-light):not(.btn-secondary) {
   color: #ffffff; }
@@ -20902,10 +20902,10 @@ div.tagsinput {
           height: auto;
           border-top: 0; }
           .sidebar .nav.sub-menu .nav-item .nav-link.active {
-            color: #ffffff;
-            background: transparent; }
+           /* color: #ffffff;
+            background: transparent; */}
           .sidebar .nav.sub-menu .nav-item .nav-link:hover {
-            color: #ffffff; }
+            color: #ffb900; }
         .sidebar .nav.sub-menu .nav-item:hover {
           background: transparent; }
     .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-category):not(.account-dropdown) > .nav-link {

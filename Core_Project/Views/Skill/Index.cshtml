@@ -2,22 +2,23 @@
 @model List<Skill>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 
   
 }
 
 <div class="card-header bg-transparent border-0">
-    <h3 class="text-white mb-0">Skill List</h3>
+    <h3 class="text-white text-center mb-0">Skill List</h3>
 </div>
 <div class="table-responsive">
-    <table class="table align-items-center table-dark">
-        <thead class="thead-dark">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
             <tr>
                 <th scope="col"></th>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Rate</th>
+                <th scope="col"></th>
                 <th scope="col">Delete</th>
                 <th scope="col">Edit</th>
             </tr>
@@ -35,22 +36,19 @@
                            
                         </div>
                     </td>
-                    <td>
+                    <td class="text-white">
                         @item.SkillID
                     </td>
-                    <td>
+                    <td class="text-white">
                         @item.Title
                     </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <span class="mr-2">@item.Value%</span>
-                            <div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" style="width: @item.Value%"></div>
-                                </div>
-                            </div>
+                    <td class="text-white">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @item.Value%" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">@item.Value</div>
                         </div>
-
+                    </td>
+                    <td>
+                 
                     </td>
 
                     <td>

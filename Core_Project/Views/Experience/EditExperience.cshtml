@@ -1,38 +1,38 @@
 ﻿@model EntityLayer.Concrete.Experience
 @{
     ViewData["Title"] = "EditExperience";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
 
-<h1>@ViewBag.v1</h1>
+<h1 class="text-center">@ViewBag.d1</h1>
 
 @using (Html.BeginForm("EditExperience", "Experience", FormMethod.Post))
 {
     @Html.HiddenFor(x => x.ExperienceID)
     <br />
     @Html.Label("Experience Title")
-    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger custom-class" })
 
     <br />
     <label>Date</label>
-    @Html.TextBoxFor(x => x.Date, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Date, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.Date, null, new { @class = "text-danger custom-class" })
 
     <br />
     <label>Description</label>
-    @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Description, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger custom-class" })
 
     <br />
     <label>Job Title</label>
-    @Html.TextBoxFor(x => x.JobTitle, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.JobTitle, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.JobTitle, null, new { @class = "text-danger custom-class" })
 
     <br />
 
     <label>Image URl</label>
-    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control text-white" })
     @Html.ValidationMessageFor(x => x.ImageUrl, null, new { @class = "text-danger custom-class" })
 
     <br />

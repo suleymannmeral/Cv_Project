@@ -13,7 +13,7 @@ namespace Core_Project.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.v1 = "Education List";
+            ViewBag.tt = "Education List Page";
             var values = educationManager.TGetList();
             return View(values);
         }

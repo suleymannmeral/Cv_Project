@@ -59,6 +59,15 @@ namespace Core_Project.Controllers
         [HttpPost]
         public IActionResult EditPortfolio(Portfolio portfolio)
         {
+         
+            if (portfolio.Completion == 100)
+            {
+                portfolio.Status = true;
+            }
+            else
+            {
+                portfolio.Status = false;
+            }
             portgolioManager.TUpdate(portfolio);
             return RedirectToAction("Index");
         }

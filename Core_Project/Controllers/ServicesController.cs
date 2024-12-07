@@ -52,6 +52,7 @@ namespace Core_Project.Controllers
         [HttpGet]
         public IActionResult EditService(int id)
         {
+            ViewBag.tt = "Edit Service Page";
             var values = serviceManager.TGetBYID(id);
             return View(values);
         }

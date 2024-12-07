@@ -2,18 +2,18 @@
 @model List<Education>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+    int counter = 0;
 }
 
 
 <div class="card-header border-0">
-    <h3 class="mb-0">Experience List Table</h3>
+    <h3 class="mb-2 text-center">@ViewBag.tt</h3>
 </div>
 <div class="table-responsive">
     <table class="table align-items-center table-flush">
         <thead class="thead-light">
             <tr>
-                <th scope="col"></th>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Education Title</th>
@@ -26,31 +26,25 @@
         <tbody>
             @foreach (var item in Model)
             {
+                counter++;
 
                     <tr>
-                        <td>
-                            <div class="media align-items-center">
-                                <a href="#" class="avatar rounded-circle">
-                                    <img alt="Image placeholder" src="~/super-folio_free_1-2-0/images/services/full-stack.svg">
-                                </a>
-
-                            </div>
+                        
+                        <td class="text-white">
+                        @counter
                         </td>
-                        <td>
-                        @item.EducationID
-                        </td>
-                        <td>
+                        <td class="text-white">
                         @item.Title
                         </td>
-                        <td>
+                    <td class="text-white">
                         @item.Name
 
                         </td>
-                        <td>
+                    <td class="text-white">
                         @item.Date
 
                         </td>
-                    <td>
+                    <td class="text-white">
                         @item.Description
 
                     </td>
@@ -72,5 +66,5 @@
         </tbody>
     </table>
     <br />
-    <a href="/Education/AddEducation" class="btn btn-danger">Add Experience</a>
+    <a href="/Education/AddEducation" class="btn btn-danger mb-3">Add Experience</a>
 </div>

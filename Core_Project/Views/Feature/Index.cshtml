@@ -2,13 +2,13 @@
 @model List<Feature>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
 
 
 
 <div class="card-header border-0">
-    <h3 class="mb-0">Experience List Table</h3>
+    <h3 class="mb-0 text-center">@ViewBag.tt</h3>
 </div>
 <div class="table-responsive">
     <table class="table align-items-center table-flush">
@@ -28,17 +28,17 @@
 
                 <tr>
                  
-                    <td>
+                    <td class="text-white">
                         @item.FeatureID
                     </td>
-                    <td>
+                    <td class="text-white">
                         @item.Header
                     </td>
-                    <td>
+                    <td class="text-white">
                         @item.Name
 
                     </td>
-                    <td>
+                    <td class="text-white">
                         @item.Title
 
                     </td>

@@ -16,6 +16,7 @@ namespace BusinessLayer.ValidationRules
             RuleFor(x => x.Description).NotEmpty().WithMessage("Description Can Not Be Empty");
             RuleFor(x => x.Age).NotEmpty().WithMessage("Age Can Not Be Empty");
             RuleFor(x => x.Mail).NotEmpty().WithMessage("Mail Can Not Be Empty");
+            RuleFor(x => x.Mail).EmailAddress().WithMessage("Mail must be a true format");
             RuleFor(x => x.Phone).NotEmpty().WithMessage("Phone Can Not Be Empty");
             RuleFor(x => x.Adress).NotEmpty().WithMessage("Adress Can Not Be Empty");
             RuleFor(x => x.ImageUrl).NotEmpty().WithMessage("Image Can Not Be Empty");
