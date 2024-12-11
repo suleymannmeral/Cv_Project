@@ -1,0 +1,48 @@
+﻿@using EntityLayer.Concrete
+@model List<Portfolio>
+             <div class="row ">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Project List</h4>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                      <th>Platform</th>
+                                                    <th>Project Name</th>
+                                                    <th>Budget</th>
+                                                    <th>Completion</th>
+                                                    <th>Project Link</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach(var item in Model)
+                                                {
+                                                    <tr>
+                                                     
+                                                        <td>
+                                                            <img src="@item.ImageUrl" alt="image" />
+                                                           
+                                                        </td>
+                                                        <td class="text-white">@item.Name</td>
+                                                        <td class="text-white">@item.Budget</td>
+                                                        <td class="text-white">@item.Completion</td>
+                                                       <td class="text-white"><a href="@item.ProjectLink" class="text-white">Go Project</a></td>
+                    
+                                                        <td>
+                                                            <div class="badge @(item.Status ? "badge-outline-success" : "badge-outline-warning")">@(item.Status ? "Completed" : "Process")</div>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                           
+                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
