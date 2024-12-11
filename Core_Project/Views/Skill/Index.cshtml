@@ -44,7 +44,7 @@
                     </td>
                     <td class="text-white">
                         <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: @item.Value%" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">@item.Value</div>
+                            <div class="progress-bar @(item.Value == 100 ? "bg-success" : "bg-danger") role="progressbar" style="width: @item.Value%" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">@item.Value</div>
                         </div>
                     </td>
                     <td>
