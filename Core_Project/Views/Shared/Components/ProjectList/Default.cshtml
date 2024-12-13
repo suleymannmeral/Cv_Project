@@ -28,8 +28,8 @@
                                                         </td>
                                                         <td class="text-white">@item.Name</td>
                                                         <td class="text-white">@item.Budget</td>
-                                                        <td class="text-white">@item.Completion</td>
-                                                       <td class="text-white"><a href="@item.ProjectLink" class="text-white">Go Project</a></td>
+                                                        <td class="text-white">%@item.Completion</td>
+                                                       <td class="text-primary"><a href="@item.ProjectLink" target="_blank" class="text-primary">Go Project</a></td>
                     
                                                         <td>
                                                             <div class="badge @(item.Status ? "badge-outline-success" : "badge-outline-warning")">@(item.Status ? "Completed" : "Process")</div>
