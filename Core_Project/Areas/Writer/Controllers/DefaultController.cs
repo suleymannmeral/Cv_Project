@@ -9,5 +9,27 @@ namespace Core_Project.Areas.Writer.Controllers
         {
             return View();
         }
+        public PartialViewResult PartialSideBar()
+        {
+            return PartialView();
+        } 
+        public PartialViewResult PartialHead()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialScripts()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialNavbar()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialThemeSettings()
+        {
+            return PartialView();
+        }
+    
+
     }
 }
