@@ -29,7 +29,11 @@ namespace Core_Project.Areas.Writer.Controllers
         {
             return PartialView();
         }
-    
+        public PartialViewResult RightSideBar()
+        {
+            return PartialView();
+        }
+
 
     }
 }
