@@ -13,9 +13,7 @@ namespace Core_Project.Areas.Writer.Models
         [Required(ErrorMessage ="Please Enter The Username")]
         public required string  UserName { get; set; }
         [Required(ErrorMessage = "Please Enter The Username")]
-        public required string Sumey { get; set; }
-
-        [Required(ErrorMessage = "Please Enter The Password")]
+      
         public required string Password { get; set; }
 
         [Required(ErrorMessage = "Please Enter The Password Again")]
@@ -24,5 +22,7 @@ namespace Core_Project.Areas.Writer.Models
 
         [Required(ErrorMessage = "Please Enter The Mail Adress")]
         public required string Mail { get; set; }
+        [Required(ErrorMessage = "Please Enter The ImageURL")]
+        public required string ImageURL { get; set; }
     }
 }

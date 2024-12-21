@@ -2,8 +2,7 @@
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Core_Project.Areas.Writer.Models; // UserRegisterViewModel için
-using EntityLayer.Concrete;            // WriterUser için
+
 
 
 namespace Core_Project.Areas.Writer.Controllers
@@ -28,20 +27,43 @@ namespace Core_Project.Areas.Writer.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(UserRegisterViewModel p)
+        public async Task<IActionResult> Index(UserRegisterViewModel p)
         {
             if (ModelState.IsValid)
             {
-                WriterUser w = new WriterUser(); 
+                WriterUser newUser = new WriterUser()
                 {
-                  
-                 
-                   
+                    UserName = p.UserName,
+                    Email = p.Mail,
+                    Name = p.Name,
+                    Surname = p.Surname,
+                    ImageUrl = p.ImageURL,
+
+
+                };
+
+                var result = await _userManager.CreateAsync(newUser, p.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Login");
                 }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
 
 
+
+                }
+                
             }
             return View();
+
+
         }
+
     }
 }
