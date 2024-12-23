@@ -42,22 +42,25 @@ namespace Core_Project.Areas.Writer.Controllers
 
                 };
 
-                var result = await _userManager.CreateAsync(newUser, p.Password);
-
-                if (result.Succeeded)
+                if (p.ConfirmPassword == p.Password)
                 {
-                    return RedirectToAction("Index", "Login");
-                }
-                else
-                {
-                    foreach (var item in result.Errors)
+                    var result = await _userManager.CreateAsync(newUser, p.Password);
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", item.Description);
+                        return RedirectToAction("Index", "Login");
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
                     }
 
-
-
                 }
+
+
+               
                 
             }
             return View();
