@@ -31,6 +31,7 @@ app.UseEndpoints(endpoints =>
       pattern: "{area:exists}/{controller=Default}/{action=Index}/{id?}"
     );
 });
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.MapControllerRoute(
     name: "default",
