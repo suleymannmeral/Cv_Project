@@ -12,10 +12,12 @@ namespace Core_Project.Areas.Writer.Controllers
     public class RegisterController : Controller
     {
         private readonly UserManager<WriterUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public RegisterController(UserManager<WriterUser> userManager)
+        public RegisterController(UserManager<WriterUser> userManager,IEmailSender emailSender)
         {
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -47,7 +49,9 @@ namespace Core_Project.Areas.Writer.Controllers
                     var result = await _userManager.CreateAsync(newUser, p.Password);
                     if (result.Succeeded)
                     {
+                       await _emailSender.SendEmailAsync("mrlslymn02@gmail.com", "Register Message", "Register Process Successfully"+ "Dear"+p.Name+" "+p.Surname);
                         return RedirectToAction("Index", "Login");
+
                     }
                     else
                     {

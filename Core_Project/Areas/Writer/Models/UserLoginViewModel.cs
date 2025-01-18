@@ -10,6 +10,7 @@ namespace Core_Project.Areas.Writer.Models
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Enter The Password")]
         public  string? Password { get; set; }
+        public  int AccessFailedCount{ get; set; }
 
     }
 }

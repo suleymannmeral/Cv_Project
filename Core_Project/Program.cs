@@ -1,3 +1,4 @@
+using Core_Project;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<Context>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 
 var app = builder.Build();
 
@@ -32,6 +35,7 @@ app.UseEndpoints(endpoints =>
     );
 });
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
 
 app.MapControllerRoute(
     name: "default",

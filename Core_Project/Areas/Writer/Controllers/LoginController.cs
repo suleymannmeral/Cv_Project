@@ -12,10 +12,16 @@ namespace Core_Project.Areas.Writer.Controllers
     public class LoginController : Controller
     {
         private readonly SignInManager<WriterUser> _signInManager;
+        private readonly UserManager<WriterUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public LoginController(SignInManager<WriterUser> signInManager)
+
+
+        public LoginController(SignInManager<WriterUser> signInManager, UserManager<WriterUser> userManager,IEmailSender emailSender)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -27,18 +33,38 @@ namespace Core_Project.Areas.Writer.Controllers
         
         public async Task<IActionResult> Index(UserLoginViewModel p)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(p.Username, p.Password, true, true);
-                if (result.Succeeded)
+            var user = await _userManager.FindByNameAsync(p.Username!);
+            if (user != null) {
+                if(user.LockoutEnd==null)
                 {
-                    return RedirectToAction("Index", "Default");
+                    if (ModelState.IsValid)
+                    {
+                        
+                        var result = await _signInManager.PasswordSignInAsync(p.Username!, p.Password!, true, true);
+                        if (result.Succeeded)
+                        {
+                            TempData["n1"] = user.Name+" "+user.Surname;
+                            TempData["n2"] = user.ImageUrl;
+
+                            return RedirectToAction("Index", "Default");
+                            
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Wrong Password Or Username");
+
+                        }
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Hatalı kullanıcı adı veya şifre");
+                    ModelState.AddModelError("", "Account Was Locked");
+                    await _emailSender.SendEmailAsync(user.Email!, "Account", "Account was locked. Please retry after 10 min");
+
                 }
+
             }
+         
             return View();
 
         }
