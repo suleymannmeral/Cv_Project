@@ -18,12 +18,6 @@ namespace Core_Project.Areas.Writer.Controllers
             return View(values);
         }
 
-        //[HttpGet]
-        //public IActionResult AnnouncementsDetails(int id)
-        //{
-        //    Announcements announcement = announcementsManager.TGetBYID(id);
-        //    return View(announcement);
-        //}
         public PartialViewResult PartialSideBar()
         {
             return PartialView();
