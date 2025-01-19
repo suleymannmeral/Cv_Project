@@ -47,9 +47,9 @@ namespace Core_Project.Areas.Writer.Controllers
                 var saveLocation=resource+"/wwwroot/userImages/"+imageName;
                 var stream=new FileStream(saveLocation, FileMode.Create);
                 await p.Picture.CopyToAsync(stream);
-                user.ImageUrl = imageName;
+                user!.ImageUrl = imageName;
             }
-            user.Name = p.Name;
+            user!.Name = p.Name;
             user.Surname = p.Surname;
             var result=await _userManager.UpdateAsync(user);
             if (result.Succeeded)
