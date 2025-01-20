@@ -46,7 +46,7 @@ namespace Core_Project.Areas.Writer.Controllers
                             TempData["n1"] = user.Name+" "+user.Surname;
                             TempData["n2"] = user.ImageUrl;
 
-                            return RedirectToAction("Index", "Default");
+                            return RedirectToAction("Index", "WriterDashboard");
                             
                         }
                         else
@@ -68,5 +68,77 @@ namespace Core_Project.Areas.Writer.Controllers
             return View();
 
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(UserResetPasswordViewModel p)
+        {
+            var user = await _userManager.FindByNameAsync(p.Username!);
+            if (user != null)
+            {
+                var email = user.Email;
+                var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var resetLink = Url.Action(
+                    "ResetPassword", 
+                    "Login",       
+                    new { token = resetToken, email = user.Email }, 
+                    Request.Scheme  
+                );
+
+                
+                await _emailSender.SendEmailAsync(email!, "Reset Password",
+                    $"Please reset your password using this link: <a href='{resetLink}'>Reset Password</a>");
+            }
+
+            ViewBag.Message = "If the email exists, a password reset link has been sent.";
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ResetPassword(string token, string email)
+        {
+            var model = new ResetPasswordViewModel
+            {
+                Token = token,
+                Email = email
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error); 
+                }
+                return View(model);
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                if (result.Succeeded)
+                {
+                    await _emailSender.SendEmailAsync(user.Email!, "İnformation", "Your password changed succesfully");
+                    return RedirectToAction("Index", "Login");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+
     }
 }
