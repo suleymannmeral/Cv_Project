@@ -39,6 +39,11 @@ namespace BusinessLayer.Concrete
             return _educationDAL.GetList();
         }
 
+        public List<Education> TGetListbyFilter()
+        {
+            throw new NotImplementedException();
+        }
+
         public void TUpdate(Education t)
         {
             _educationDAL.Update(t);

@@ -30,6 +30,9 @@ namespace DataAccessLayer.Concrete
         public DbSet<UsersMessages> UsersMessages{ get; set; }
         public DbSet<Todolist> Todolist{ get; set; }
         public DbSet<Announcements> Announcements{ get; set; }
+        public DbSet<WriterMessage> WriterMessage{ get; set; }
 
     }
 }
+
+

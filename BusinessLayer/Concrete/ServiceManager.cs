@@ -38,6 +38,11 @@ namespace BusinessLayer.Concrete
             return _serviceDAL.GetList();
         }
 
+        public List<Service> TGetListbyFilter()
+        {
+            throw new NotImplementedException();
+        }
+
         public void TUpdate(Service t)
         {
             _serviceDAL.Update(t);

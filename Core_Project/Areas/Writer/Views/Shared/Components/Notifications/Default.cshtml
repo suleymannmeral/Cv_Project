@@ -10,13 +10,13 @@
      
                 @foreach(var item in Model)
                 {
-            <a class="dropdown-item preview-item">
+            <a class="dropdown-item preview-item" onclick="showDetails('@item.Content')">
                 <div class="preview-thumbnail">
                     <div class="preview-icon bg-info">
                         <i class="ti-email mx-0"></i>  
                     </div>
                 </div>
-                <div class="preview-item-content" onclick="showDetails('@item.Content')">
+                <div class="preview-item-content" >
                     
                     <h6 class="preview-subject font-weight-normal">@item.Title</h6>
                     <p class="font-weight-light small-text mb-0 text-muted">
