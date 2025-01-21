@@ -49,7 +49,7 @@ namespace Core_Project.Areas.Writer.Controllers
                     var result = await _userManager.CreateAsync(newUser, p.Password);
                     if (result.Succeeded)
                     {
-                       await _emailSender.SendEmailAsync("mrlslymn02@gmail.com", "Register Message", "Register Process Successfully"+ "Dear"+p.Name+" "+p.Surname);
+                       await _emailSender.SendEmailAsync(p.Mail, "Register Message", "Register Process Successfully"+ "Dear"+p.Name+" "+p.Surname);
                         return RedirectToAction("Index", "Login");
 
                     }

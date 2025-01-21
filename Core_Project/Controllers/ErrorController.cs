@@ -10,7 +10,10 @@ namespace Core_Project.Controllers
             if (statusCode == 404)
             {
                 return View("NotFound"); // "NotFound" adında bir görünüm döndür
+                
+
             }
+          
 
             return View("Error"); // Diğer hatalar için genel bir sayfa döndür
         }

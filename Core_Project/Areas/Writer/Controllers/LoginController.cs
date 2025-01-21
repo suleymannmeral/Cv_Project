@@ -51,18 +51,28 @@ namespace Core_Project.Areas.Writer.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Wrong Password Or Username");
+
+                            TempData["ErrorMessage"] = "Wrong Password";
+                            return RedirectToAction("Index", "Login");
+                           
+
+                           
 
                         }
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Account Was Locked");
+                    TempData["ErrorMessage"] = "Account Was Locked";
+            
                     await _emailSender.SendEmailAsync(user.Email!, "Account", "Account was locked. Please retry after 10 min");
 
                 }
 
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Username Not Found";
             }
          
             return View();
@@ -137,6 +147,12 @@ namespace Core_Project.Areas.Writer.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Login");
         }
 
 

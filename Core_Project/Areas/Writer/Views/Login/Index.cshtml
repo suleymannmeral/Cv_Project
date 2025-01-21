@@ -53,23 +53,48 @@
                                             Keep me signed in
                                         </label>
                                     </div>
-                                    <a href="/Writer/Login/ForgotPassword" class="auth-link text-black">Forgot password?</a>
+                                    <a href="/Writer/Login/ForgotPassword" class="auth-link text-black">Forgot password? @ViewBag.em</a>
                                 </div>
                               
                                 <div class="text-center mt-4 font-weight-light">
-                                    Don't have an account? <a href="/Writer/Register/Index" class="text-primary">Create</a>
+                                    Don't have an account? <a href="/Writer/Register/Index" class="text-primary">Create</a>  
                                 </div>
-                                <div class="text-danger" asp-validation-summary="ModelOnly">
-                                </div>
+                             
+                               
 
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+   
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                // Check if TempData contains a message
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <text>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: '@TempData["ErrorMessage"]',
+                                confirmButtonText: 'OK',
+                                didOpen: () => {
+                                   
+                                    const icon = Swal.getIcon();
+                                    icon.style.marginTop = '30px'; 
+                                }
+                            });
+                    </text>
+                }
+            </script>
+
+        
+
             <!-- content-wrapper ends --
         </div>
     </div>
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="~/skydash//vendors/js/vendor.bundle.base.js"></script>
