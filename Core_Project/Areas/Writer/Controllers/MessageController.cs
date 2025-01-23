@@ -26,5 +26,15 @@ namespace Core_Project.Areas.Writer.Controllers
             var values = writerMessageManager.TGetListbyFilter(p);
             return View(values);
         }
+        public IActionResult DeleteMessage(int id)
+        {
+            var values = writerMessageManager.TGetBYID(id);
+            writerMessageManager.TDelete(values);
+            return RedirectToAction("Index","Message");
+
+
+           
+
+        }
     }
 }

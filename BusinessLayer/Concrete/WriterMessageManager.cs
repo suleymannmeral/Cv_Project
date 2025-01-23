@@ -25,12 +25,12 @@ namespace BusinessLayer.Concrete
 
         public void TDelete(WriterMessage t)
         {
-            throw new NotImplementedException();
+             _writerMessageDAL.Delete(t);
         }
 
         public WriterMessage TGetBYID(int id)
         {
-            throw new NotImplementedException();
+            return _writerMessageDAL.GetById(id);
         }
 
         public List<WriterMessage> TGetList()

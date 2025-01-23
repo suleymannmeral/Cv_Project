@@ -9,7 +9,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Announcements</h4>
+            <h4 class="card-title">Messages</h4>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -18,6 +18,7 @@
                             <th>Title</th>
                             <th>Date</th>
                             <th>Details</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,13 +30,15 @@
                             <th>@item.Subject</th>
                            
                             <td>@(((DateTime)item.Date).ToString("dd-MM-yyyy"))</td>
-                          
+                           
                             <td>
                                 <button class="btn btn-outline-primary"
                                         onclick="showDetails('@item.Content')">
                                     Details
                                 </button>
                             </td>
+                                <th><a href="/Writer/Message/DeleteMessage/@item.WriterMessageID" class="btn btn-outline-danger">Delete</a></th>
+
                         </tr>
                     }
                        
