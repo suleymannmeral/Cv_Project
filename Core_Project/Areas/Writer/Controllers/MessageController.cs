@@ -70,5 +70,28 @@ namespace Core_Project.Areas.Writer.Controllers
            
 
         }
+        public async Task<IActionResult> ShowMessageUser(string mail)
+        {
+            var user = await _userManager.FindByEmailAsync(mail);
+
+            if (user == null)
+            {
+                return Json(new { success = false, message = "Kullanıcı bulunamadı." });
+            }
+
+            
+           
+
+            return Json(new
+            {
+                success = true,
+                name = user.Name,
+                surname = user.Surname,
+                phone = user.PhoneNumber,
+                imageUrl = "/UserImages/" + user.ImageUrl
+        });
+        }
+
+
     }
 }

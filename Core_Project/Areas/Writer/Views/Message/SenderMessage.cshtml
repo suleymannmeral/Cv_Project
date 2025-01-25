@@ -15,6 +15,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Receiver</th>
                             <th>Title</th>
                             <th>Date</th>
                             <th>Details</th>
@@ -27,6 +28,7 @@
                             count++;
                                 <tr>
                                 <th>@count</th>
+                                <th><a onclick="showSender('@item.Receiver')" class="btn btn-outline-primary">@item.Receiver</a></th>
                                 <th>@item.Subject</th>
 
                                 <td>@(((DateTime)item.Date).ToString("dd-MM-yyyy"))</td>
@@ -64,6 +66,44 @@
             confirmButtonText: 'OK'
         });
     }
+     async function showSender(mail) {
+        try {
+            // Backend'den gönderici bilgilerini al
+            const response = await fetch(`/Writer/Message/ShowMessageUser?mail=${mail}`);
+            const data = await response.json();
+
+            if (data.success) {
+                // SweetAlert ile bilgileri göster
+                Swal.fire({
+                    title: 'Receiver Details',
+                    html: `
+                        <p><strong>Ad:</strong> ${data.name} ${data.surname}</p>
+                        <p><strong>Telefon:</strong> ${data.phone}</p>
+                    `,
+                    imageUrl: data.imageUrl || 'https://via.placeholder.com/150', // Eğer resim yoksa varsayılan bir resim
+                    imageWidth: 150,
+                    imageHeight: 150,
+                    imageAlt: 'Gönderen Resmi',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Hata',
+                    text: data.message || 'Gönderen bilgileri alınamadı.',
+                    icon: 'error',
+                    confirmButtonText: 'Kapat'
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: 'Hata',
+                text: 'Bir hata oluştu.',
+                icon: 'error',
+                confirmButtonText: 'Kapat'
+            });
+        }
+    }
+     
 
     function deleteAlert(messageId) {
         Swal.fire({
