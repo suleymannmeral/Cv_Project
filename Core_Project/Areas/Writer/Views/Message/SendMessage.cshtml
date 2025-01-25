@@ -1,0 +1,31 @@
+﻿@model EntityLayer.Concrete.WriterMessage
+
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+
+<form method="post" class="">
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control text-white" id="exampleInputEmail1" name="Subject"  placeholder="Title">
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Receiver Mail</label>
+        <input type="text" class="form-control text-white" id="exampleInputPassword1" name="Receiver" placeholder="Receiver Mail">
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Content</label>
+        <input type="text" class="form-control text-white" id="exampleInputPassword1" name="Content" placeholder="Content">
+
+    </div>
+  
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

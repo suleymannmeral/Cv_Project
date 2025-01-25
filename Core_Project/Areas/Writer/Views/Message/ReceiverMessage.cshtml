@@ -1,0 +1,110 @@
+﻿@using EntityLayer.Concrete
+@model List<WriterMessage>
+@{
+    ViewData["Title"] = "ReceiverMessage";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    int count = 0;
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Received Messages</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model)
+                        {
+                            count++;
+                            <tr>
+                            <th>@count</th>
+                            <th>@item.Subject</th>
+                           
+                            <td>@(((DateTime)item.Date).ToString("dd-MM-yyyy"))</td>
+                           
+                            <td>
+                                <button class="btn btn-outline-primary"
+                                        onclick="showDetails('@item.Content')">
+                                    Details
+                                </button>
+                            </td>
+                            <td>
+                                    <button class="btn btn-outline-danger"
+                                            onclick="deleteAlert('@item.WriterMessageID')">
+                                        Delete
+                                    </button>
+
+                            </td>
+                               
+                        </tr>
+                    }
+                       
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function showDetails(content) {
+        Swal.fire({
+            text: content,
+            icon: 'info',
+            confirmButtonText: 'OK'
+        });
+    }
+
+    function deleteAlert(messageId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Silme işlemi burada yapılır
+                fetch(`/Writer/Message/DeleteMessage/${messageId}`, {
+                    method: 'DELETE',
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your message has been deleted.',
+                            'success'
+                        ).then(() => {
+                            location.reload(); // Sayfayı yeniler
+                        });
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem deleting the message.',
+                            'error'
+                        );
+                    }
+                })
+                .catch(error => {
+                    Swal.fire(
+                        'Error!',
+                        'There was a problem deleting the messagesss.',
+                        'error'
+                    );
+                });
+            }
+        });
+    }
+</script>
