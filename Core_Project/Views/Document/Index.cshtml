@@ -1,0 +1,98 @@
+﻿@using EntityLayer.Concrete
+@model List<Documents>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Skydash Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/skydash/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/skydash/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/skydash/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/skydash/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/skydash/images/favicon.png" />
+</head>
+
+<body>
+    <div class="container-scroller ">
+        <!-- partial:../../partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:../../partials/_settings-panel.html -->
+      
+     
+            <div class="main-panel">
+               
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <div class="card ">
+                            <div class="card-body  ">
+                                    <h4 class="card-title text-center">Documents For Seng Students</h4>
+                              
+
+                                <div class="table-responsive ">
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Course</th>
+                                                    <th>Title</th>
+                                                    <th>PDF</th>
+                                                    <th>PDF</th>
+                                                  
+                                                 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach(var item in Model)
+                                                {
+                                                <tr>
+                                                    <td>@item.CourseName</td>
+                                                    <td>@item.Title</td>
+                                                    <td><a href="~/Documents/Yapay Zeka Final Tekrar.pdf" target="_blank">@item.PdfLink</a></td>
+                                                    <td><a href="/Document/DocumentList/@item.CourseName" class="btn btn-outline-warning">Yapay Zeka</a></td>
+
+                                                    
+                                                </tr>
+                                                }
+                                           
+                                          
+                                           
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+           
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+            
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
+</body>
+
+</html>
