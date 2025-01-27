@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Document\Data\" />
     <Folder Include="Areas\Writer\Data\" />
     <Folder Include="wwwroot\UserImages\" />
   </ItemGroup>

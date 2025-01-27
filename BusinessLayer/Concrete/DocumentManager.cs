@@ -28,7 +28,7 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(Documents t)
         {
-            throw new NotImplementedException();
+            _documentDal.Insert(t);
         }
 
         public void TDelete(Documents t)

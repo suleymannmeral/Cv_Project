@@ -1,0 +1,36 @@
+﻿@model EntityLayer.Concrete.Documents
+
+@{
+    ViewData["Title"] = "AddDocument";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<h1 class="text-center">@ViewBag.v1</h1>
+<br />
+
+<form method="post" class="">
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Course Name</label>
+        <input type="text" class="form-control text-white" id="exampleInputEmail1" name="CourseName" placeholder="Course Name">
+        @Html.ValidationMessageFor(x => x.CourseName, null, new { @class = "text-danger custom-class" })
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Title</label>
+        <input type="text" class="form-control text-white" id="exampleInputPassword1" name="Title" placeholder="Title">
+        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger custom-class" })
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Title</label>
+        <input type="text" class="form-control text-white" id="exampleInputPassword1" name="PDFLink" placeholder="PDF Link">
+        @Html.ValidationMessageFor(x => x.PdfLink, null, new { @class = "text-danger custom-class" })
+
+    </div>
+  
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
