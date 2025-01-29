@@ -9,6 +9,7 @@ using NuGet.Versioning;
 namespace Core_Project.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[controller]/[action]")]
     public class MessageController : Controller
     {
         WriterMessageManager writerMessageManager = new WriterMessageManager(new EFWriterMessageDAL());
@@ -58,7 +59,7 @@ namespace Core_Project.Areas.Writer.Controllers
 
 
             writerMessageManager.TAdd(p);
-            return RedirectToAction("SenderMessage", "Message");
+            return RedirectToAction("SenderMessage");
         }
         public IActionResult DeleteMessage(int id)
         {

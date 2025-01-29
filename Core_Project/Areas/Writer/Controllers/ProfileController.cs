@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Core_Project.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[controller]/[action]")]
 
     public class ProfileController : Controller
     {

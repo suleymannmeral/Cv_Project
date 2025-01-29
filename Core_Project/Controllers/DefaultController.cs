@@ -36,10 +36,10 @@ namespace Core_Project.Controllers
         [HttpPost]
         public PartialViewResult SendMessage(Message p)
         {
-            //MessageManager messageManager = new MessageManager(new EFMessageDAL());
+            MessageManager messageManager = new MessageManager(new EFMessageDAL());
             p.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             p.Status = true;
-            //messageManager.TAdd(p);
+            messageManager.TAdd(p);
 
             return PartialView();
         }
