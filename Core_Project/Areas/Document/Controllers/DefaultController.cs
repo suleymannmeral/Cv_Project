@@ -37,5 +37,30 @@ namespace Core_Project.Areas.Document.Controllers
            
 
         }
+        [HttpGet]
+        public IActionResult EditDocument(int id)
+        {
+            var values = DocumentManager.TGetBYID(id);
+
+            return View(values);
+        }
+        [HttpPost]
+        public IActionResult EditDocument(Documents document)
+        {
+
+            DocumentManager.TUpdate(document);
+
+
+            return RedirectToAction("Index", "Default", new { area = "Document" });
+
+
+        }
+
+        public IActionResult DeleteDocument(int id)
+        {
+            var values = DocumentManager.TGetBYID(id);
+            DocumentManager.TDelete(values);
+            return RedirectToAction("Index", "Default", new { area = "Document" });
+        }
     }
 }

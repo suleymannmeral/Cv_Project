@@ -1,0 +1,26 @@
+﻿@model EntityLayer.Concrete.Documents
+@{
+    ViewData["Title"] = "EditDocument";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<form class="forms-sample" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="DocumentID" value="@Model.DocumentID" />
+    <div class="form-group">
+        <label for="exampleInputName1">Course Name</label>
+        <input type="text"  name="CourseName" class="form-control" id="exampleInputName1" placeholder="@Model.CourseName">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail3">Title</label>
+        <input type="text" class="form-control" asp-for="Title" name="Title" id="exampleInputEmail3" placeholder="@Model.Title">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword4">PDF Link</label>
+        <input type="text" class="form-control"  name="PdfLink" id="exampleInputPassword4" placeholder="@Model.PdfLink">
+    </div>
+ 
+   
+    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+</form>
+
+

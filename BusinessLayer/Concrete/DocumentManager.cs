@@ -33,12 +33,12 @@ namespace BusinessLayer.Concrete
 
         public void TDelete(Documents t)
         {
-            throw new NotImplementedException();
+           _documentDal.Delete(t);
         }
 
         public Documents TGetBYID(int id)
         {
-            throw new NotImplementedException();
+            return _documentDal.GetById(id);
         }
 
         public List<Documents> TGetList()
@@ -53,7 +53,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Documents t)
         {
-            throw new NotImplementedException();
+           _documentDal.Update(t);
         }
     }
 }
