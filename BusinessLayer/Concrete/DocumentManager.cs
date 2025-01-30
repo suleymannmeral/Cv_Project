@@ -20,6 +20,15 @@ namespace BusinessLayer.Concrete
             _documentDal = documentDal;
         }
 
+        public List<Documents> GetCourseNameDistinct()
+        {
+            return _documentDal.GetList()
+                               .GroupBy(x => x.CourseName)
+                               .Select(g => g.First())  
+                               .ToList();
+        }
+
+
         public List<Documents> GetDocumentsByCourseName(string p)
         {
             return _documentDal.GetbyFilter(x => x.CourseName == p);
@@ -55,5 +64,7 @@ namespace BusinessLayer.Concrete
         {
            _documentDal.Update(t);
         }
+
+        
     }
 }

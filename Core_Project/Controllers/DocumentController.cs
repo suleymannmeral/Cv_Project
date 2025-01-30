@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +11,10 @@ namespace Core_Project.Controllers
 
         public IActionResult Index()
         {
-            var values = DocumentManager.TGetList();
-            return View(values);
+            var courseNames = DocumentManager.GetCourseNameDistinct();
+                          
+
+            return View(courseNames);
           
         }
         public IActionResult DocumentList(string id)

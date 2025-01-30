@@ -10,6 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IDocumentService:IGenericService<Documents>
     {
         List<Documents> GetDocumentsByCourseName(string p);
+        List<Documents> GetCourseNameDistinct();
 
     }
 }

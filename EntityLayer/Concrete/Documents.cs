@@ -11,7 +11,7 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int DocumentID { get; set; }
-        public string? CourseName { get; set; }
+        public string CourseName { get; set; }
         public string? Title { get; set; }
         public string? PdfLink { get; set; }
         
