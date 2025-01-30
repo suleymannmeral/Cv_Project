@@ -4,7 +4,7 @@
     {
         public string? CourseName { get; set; }
         public string? Title { get; set; }
-        public string? PdfLink { get; set; }
+        public IFormFile? PdfFile { get; set; } // PDF dosyasını yüklemek için
 
     }
 }

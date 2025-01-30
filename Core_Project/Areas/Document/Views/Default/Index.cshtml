@@ -15,10 +15,8 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">Course Name</th>
-                <th scope="col">Title</th>
-                <th scope="col">PDF Link</th>
-                <th scope="col">Delete</th>
-                <th scope="col">Edit</th>
+              
+                <th scope="col">View</th>
             </tr>
         </thead>
         <tbody>
@@ -31,30 +29,21 @@
                     <td class="text-white">
                         @item.CourseName
                     </td>
-                    <td class="text-white">
-                        @item.Title
-                    </td>
-                    <td class="text-white">
-                        @item.PdfLink
-
-                    </td>
+                  
+                  
                   
 
 
                     <td>
-                        <a href="/Document/Default/DeleteDocument/@item.DocumentID" class="btn btn-danger">Delete</a>
-                    </td>
-                    <td>
-                        <a href="/Document/Default/EditDocument/@item.DocumentID" class="btn btn-warning">Edit</a>
+                        <a href="/Document/Default/ViewDocumentsByName/@item.CourseName" class="btn btn-warning">View</a>
 
 
                     </td>
                 </tr>
 
             }
-
         </tbody>
     </table>
     <br />
-    <a href="/Education/AddEducation" class="btn btn-danger mb-3">Add Experience</a>
+    <a href="/Document/Default/AddDocument" class="btn btn-danger mb-3">Add Document</a>
 </div>

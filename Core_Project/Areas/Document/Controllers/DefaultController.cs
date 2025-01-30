@@ -15,9 +15,15 @@ namespace Core_Project.Areas.Document.Controllers
 
         public IActionResult Index()
         {
-            var values = DocumentManager.TGetList();
+            var values = DocumentManager.GetCourseNameDistinct();
             return View(values);
         }
+        public IActionResult ViewDocumentsByName(string id)
+        {
+            var values = DocumentManager.GetDocumentsByCourseName(id);
+            return View(values);
+        }
+
 
         [HttpGet]
         public IActionResult AddDocument()
@@ -26,17 +32,41 @@ namespace Core_Project.Areas.Document.Controllers
             return View();  
         }
         [HttpPost]
-        public  IActionResult AddDocument(Documents document)
+        public IActionResult AddDocument(AddDocumentsViewModel p)
         {
-            
-        
-             DocumentManager.TAdd(document);
-           
-            
-                return RedirectToAction("Index", "Default");
-           
+            if (p.PdfFile != null && p.PdfFile.Length > 0)
+            {
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
 
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(p.PdfFile.FileName);
+                var filePath = Path.Combine(folderPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    p.PdfFile.CopyTo(stream);
+                }
+
+              
+                var document = new Documents
+                {
+                    CourseName = p.CourseName,
+                    Title = p.Title,
+                    PdfLink = "/Documents/" + uniqueFileName 
+                };
+
+                DocumentManager.TAdd(document); 
+
+                return RedirectToAction("Index", "Default");
+            }
+
+            return View(p);
         }
+
+
         [HttpGet]
         public IActionResult EditDocument(int id)
         {
@@ -55,6 +85,7 @@ namespace Core_Project.Areas.Document.Controllers
 
 
         }
+
 
         public IActionResult DeleteDocument(int id)
         {

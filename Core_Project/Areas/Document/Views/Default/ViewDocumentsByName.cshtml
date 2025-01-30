@@ -1,0 +1,51 @@
+﻿@using EntityLayer.Concrete
+@model List<Documents>
+@{
+    ViewData["Title"] = "ViewDocumentsByName";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+<div class="card-header border-0">
+    <h3 class="mb-2 text-center">Document Panel</h3>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Link</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+                    <td class="text-white">
+                        @item.Title
+                    </td>
+                    <td class="text-white">
+                       <a href="@item.PdfLink">Link</a>
+                    </td>
+
+
+
+
+
+                    <td>
+                        <a href="/Document/Default/DeleteDocument/@item.DocumentID" class="btn btn-warning">Delete</a>
+                    </td>
+                    <td>
+                        <a href="/Document/Default/EditDocument/@item.DocumentID" class="btn btn-warning">Edit</a>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+    <br />
+</div>
