@@ -6,8 +6,6 @@
     int counter = 0;
 }
 
-
-
 <div class="card-header border-0">
     <h3 class="mb-2 text-center">@ViewBag.tt</h3>
 </div>
@@ -20,45 +18,52 @@
                 <th scope="col">Mail</th>
                 <th scope="col">Date</th>
                 <th scope="col">Delete</th>
-                <th scope="col">Mesajı Gör</th>
+                <th scope="col">View Message</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                counter++;
+                counter++; 
+
+                string modalId = "exampleModalLong_" + item.MessageID;
 
                 <tr>
-
-                    <td class="text-white">
-                        @counter
-                    </td>
-                    <td class="text-white">
-                        @item.Name
-                    </td>
-                    <td class="text-white">
-                        @item.Mail
-
-                    </td>
+                    <td class="text-white">@counter</td>
+                    <td class="text-white">@item.Name</td>
+                    <td class="text-white">@item.Mail</td>
                     <td class="text-white">@(((DateTime)item.Date).ToString("dd/MM/yyyy"))</td>
-
-
-
-
                     <td>
                         <a href="/Contact/DeleteContactMessage/@item.MessageID" class="btn btn-danger">Delete</a>
                     </td>
                     <td>
-                        <a href="/Education/EditEducation/@item.MessageID" class="btn btn-warning">Edit</a>
-
-
+                       
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">
+                            View Message
+                        </button>
                     </td>
                 </tr>
 
+                <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitle_@item.MessageID" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle_@item.MessageID">Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @item.Content
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-
         </tbody>
     </table>
     <br />
-    <a href="/Education/AddEducation" class="btn btn-danger mb-3">Add Experience</a>
 </div>

@@ -18,7 +18,7 @@ namespace Core_Project.Controllers
         {
             var values = messageManager.TGetBYID(id);
             messageManager.TDelete(values);
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
