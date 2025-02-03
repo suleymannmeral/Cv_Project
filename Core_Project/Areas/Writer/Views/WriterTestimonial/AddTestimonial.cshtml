@@ -1,0 +1,38 @@
+﻿@model Core_Project.Areas.Writer.Models.AddTestimonialViewModel
+
+@{
+    ViewData["Title"] = "AddTestimonial";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+
+
+
+<form method="post" class="">
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control " id="exampleInputEmail1" name="ClientName" placeholder="Name">
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Company</label>
+        <input type="text" class="form-control " id="exampleInputPassword1" name="Company" placeholder="Company">
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Comment</label>
+        <textarea type="text" class="form-control " id="exampleInputPassword1" name="Comment" placeholder="Comment"></textarea>
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Job Title</label>
+        <textarea type="text" class="form-control " id="exampleInputPassword1" name="JobTitle" placeholder="Job Title"></textarea>
+
+    </div>
+
+
+    <button type="submit" onclick="showInfo" class="btn btn-primary">Send</button>
+</form>
+
