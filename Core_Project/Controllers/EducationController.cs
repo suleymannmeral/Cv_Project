@@ -3,10 +3,13 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class EducationController : Controller
     {
         EducationManager educationManager = new EducationManager(new EFEducationDAL());

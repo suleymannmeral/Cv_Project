@@ -1,7 +1,11 @@
 ﻿using Core_Project;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,27 @@ builder.Services.AddIdentity<WriterUser, WriterRole>()
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+builder.Services.AddMvc(
+    config =>
+    {
+        var policy=new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+        config.Filters.Add(new AuthorizeFilter(policy));
+    }
+    
+    );
+
+builder.Services.ConfigureApplicationCookie(
+
+    options =>
+    {
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        options.AccessDeniedPath = "/Error/";
+        options.LoginPath = "/Writer/Login/Index";
+    }
+    );
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,7 +52,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Kimlik doğrulama middleware'i
+app.UseAuthentication(
+   
+    ); 
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

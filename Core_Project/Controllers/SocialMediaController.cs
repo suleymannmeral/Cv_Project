@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Controllers
 {
-    public class AdminDashboardController : Controller
-    {
-        [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
 
+    public class SocialMediaController : Controller
+    {
         public IActionResult Index()
         {
             return View();

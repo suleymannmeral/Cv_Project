@@ -10,7 +10,7 @@ namespace Core_Project.ViewComponents.Contact
 
         public IViewComponentResult Invoke()
         {
-            var values=contactManager.TGetList();
+            var values = contactManager.TGetList().Take(3).ToList();
             return View(values);
         }
 

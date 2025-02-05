@@ -1,0 +1,143 @@
+﻿@using EntityLayer.Concrete
+@model List<Testimonial>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+    int counter = 0;
+
+}
+
+
+<div class="card-header border-0">
+    <h3 class="mb-2 text-center">Testimonials</h3>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Company</th>
+                <th scope="col">Job Title</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string modalId = "exampleModalLong_" + item.TestimonialID;
+
+                counter++;
+
+                        <tr>
+
+                            <td class="text-white">
+                        @counter
+                            </td>
+                            <td class="text-white">
+                        <button class="btn btn-outline-warning"
+                                onclick="showTestimonial('@item.ClientName')">
+                            @item.ClientName
+                        </button>
+                            </td>
+                        <td class="text-white">
+                        @item.Company
+
+                            </td>
+                        <td class="text-white">
+                       @item.JobTitle
+
+                            </td>
+                        
+
+                    <td>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">
+                            View Comment
+                        </button>
+                    </td>
+
+                   
+
+
+
+                        <td>
+                                <a href="/Testimonial/DeleteTestimonial/@item.TestimonialID" class="btn btn-danger">Delete</a>
+                            </td>
+                          
+                        </tr>
+                <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitle_@item.TestimonialID" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle_@item.TestimonialID">Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @item.Comment
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </tbody>
+    </table>
+    <br />
+    <a href="/Education/AddEducation" class="btn btn-danger mb-3">Add Experience</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   
+          async function showTestimonial(name) {
+        try {
+            // Backend'den gönderici bilgilerini al
+            const response = await fetch(`/Testimonial/ShowTestimonialUser?name=${name}`);
+            const data = await response.json();
+
+            if (data.success) {
+                // SweetAlert ile bilgileri göster
+                Swal.fire({
+                    title: 'Client',
+                    html: `
+                        <p><strong>Ad:</strong> ${data.clientname}</p>
+                    `,
+                    imageUrl: data.imageUrl || 'https://via.placeholder.com/150', // Eğer resim yoksa varsayılan bir resim
+                    imageWidth: 150,
+                    imageHeight: 150,
+                    imageAlt: 'Gönderen Resmi',
+                    confirmButtonText: 'OK',
+                      customClass: {
+                         title: 'swal-title-custom'
+                      }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Hata',
+                    text: data.message || 'Gönderen bilgileri alınamadı.',
+                    icon: 'error',
+                    confirmButtonText: 'Kapat'
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: 'Hata',
+                text: 'Bir hata oluştu.',
+                icon: 'error',
+                confirmButtonText: 'Kapat'
+            });
+        }
+    }
+
+  
+</script>
+
+

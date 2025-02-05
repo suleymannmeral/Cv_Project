@@ -1,0 +1,72 @@
+﻿@using EntityLayer.Concrete
+@model List<Announcements>
+@{
+    ViewData["Title"] = "AnnouncementsList";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+    int counter = 0;
+}
+
+
+
+<div class="card-header border-0">
+    <h3 class="mb-2 text-center">Admin Announcements</h3>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Type</th>
+                <th scope="col">Date</th>
+                <th scope="col">Delete</th>
+                <th scope="col">View Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                counter++;
+
+                string modalId = "exampleModalLong_" + item.ID;
+
+                <tr>
+                    <td class="text-white">@counter</td>
+                    <td class="text-white">@item.Title</td>
+                    <td class="text-white">@item.Status</td>
+                    <td class="text-white">@(((DateTime)item.Date).ToString("dd/MM/yyyy"))</td>
+                    <td>
+                        <a href="/AdminAnnouncements/DeleteAnnouncements/@item.ID" class="btn btn-danger">Delete</a>
+                    </td>
+                    <td>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">
+                            View Message
+                        </button>
+                    </td>
+                </tr>
+
+                <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitle_@item.ID" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle_@item.ID">Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @item.Content
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+

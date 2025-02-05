@@ -1,4 +1,14 @@
-﻿ <nav class="sidebar sidebar-offcanvas" id="sidebar">
+﻿@using EntityLayer.Concrete
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<WriterUser> UserManager
+@inject SignInManager<WriterUser> SignInManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var roles = user != null ? await UserManager.GetRolesAsync(user) : new List<string>();
+    bool isAdmin = roles.Contains("Admin"); 
+}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/Writer/WriterDashboard/Index">
@@ -55,6 +65,16 @@
             </a>
 
         </li>
+        @* **Admin rolündeki kullanıcıya özel link** *@
+        @if (isAdmin)
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminDashboard/Index">
+                    <i class="icon-layout menu-icon"></i>
+                    <span class="menu-title">Admin Panel</span>
+                </a>
+            </li>
+        }
      
                 </ul>
             </nav>
