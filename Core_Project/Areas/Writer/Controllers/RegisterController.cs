@@ -1,5 +1,6 @@
 ﻿using Core_Project.Areas.Writer.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Core_Project.Areas.Writer.Controllers
 {
     [Area("Writer")]
     [Route("Writer/[controller]/[action]")]
+    [AllowAnonymous]
 
 
     public class RegisterController : Controller

@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+
 
     public class DocumentController : Controller
     {

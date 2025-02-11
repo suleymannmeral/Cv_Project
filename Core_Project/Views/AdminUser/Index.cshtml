@@ -1,0 +1,84 @@
+﻿@using EntityLayer.Concrete
+@model List<WriterUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+    int counter = 0;
+}
+
+
+
+
+
+<div class="card-header border-0">
+    <h3 class="mb-2 text-center">@ViewBag.tt</h3>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Access Failed Count</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Lock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                counter++;
+
+                <tr>
+
+                    <td class="text-white">
+                        @counter
+                    </td>
+                    <td class="text-white">
+                        @item.Name
+                    </td>
+                    <td class="text-white">
+                        @item.Surname
+
+                    </td>
+                    <td class="text-white">
+                        @item.UserName
+
+                    </td>
+                    <td class="text-white">
+                        @item.Email
+
+                    </td>
+ 
+                    <td class="text-white">
+                        @item.AccessFailedCount
+
+                    </td>
+
+
+
+
+                    <td>
+                        @Html.Raw(item.UserName != "suleymannmeral"
+                                 ? $"<a href='/AdminUser/DeleteUser/{item.Id}' class='btn btn-danger'>Delete</a>"
+                                 : "<a href='#' class='btn btn-success'>ADMIN</a>")
+
+
+                </td>
+                    <td>
+                        <a href="/AdminUser/EditBan/@item.Id" class="btn btn-warning"> @(item.LockoutEnd.HasValue ? "Remove Ban" : "Lock Account")</a>
+
+
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+    <br />
+    <a href="/Education/AddEducation" class="btn btn-danger mb-3">Add Experience</a>
+</div>

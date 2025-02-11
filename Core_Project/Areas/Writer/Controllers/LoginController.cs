@@ -69,7 +69,7 @@ namespace Core_Project.Areas.Writer.Controllers
                 {
                     TempData["ErrorMessage"] = "Account Was Locked";
             
-                    await _emailSender.SendEmailAsync(user.Email!, "Account", "Account was locked. Please retry after 10 min");
+                    await _emailSender.SendEmailAsync(user.Email!, "Account", "Account was locked");
 
                 }
 

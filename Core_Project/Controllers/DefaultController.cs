@@ -37,15 +37,16 @@ namespace Core_Project.Controllers
             return PartialView();
         }
         [HttpPost]
-        public PartialViewResult SendMessage(Message p)
+        public JsonResult SendMessage(Message p)
         {
             MessageManager messageManager = new MessageManager(new EFMessageDAL());
-            p.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            p.Date = DateTime.Now;
             p.Status = true;
             messageManager.TAdd(p);
 
-            return PartialView();
+            return Json(new { success = true, message = "Message sent successfully!" });
         }
+
 
     }
 }

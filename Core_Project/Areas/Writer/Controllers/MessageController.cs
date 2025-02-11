@@ -65,10 +65,7 @@ namespace Core_Project.Areas.Writer.Controllers
         {
             var values = writerMessageManager.TGetBYID(id);
             writerMessageManager.TDelete(values);
-            return RedirectToAction("Index","Default");
-
-
-           
+            return RedirectToAction("Index","Default");         
 
         }
         public async Task<IActionResult> ShowMessageUser(string mail)

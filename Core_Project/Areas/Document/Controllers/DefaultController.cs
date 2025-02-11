@@ -2,12 +2,14 @@
 using Core_Project.Areas.Document.Models;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core_Project.Areas.Document.Controllers
 {
     [Area("Document")]
+    [AllowAnonymous]
 
     public class DefaultController : Controller
     {
