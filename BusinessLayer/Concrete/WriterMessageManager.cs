@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
         public List<WriterMessage> GetListReceiverList(string p)
         {
-            return _writerMessageDAL.GetbyFilter(x => x.Receiver == p);
+            return _writerMessageDAL.GetbyFilter(x => x.Receiver == p).OrderByDescending(x=>x.WriterMessageID).ToList();
 
         }
 

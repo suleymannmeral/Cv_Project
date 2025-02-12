@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Core_Project.Areas.Document.Controllers
 {
     [Area("Document")]
-    [AllowAnonymous]
+ 
 
     public class DefaultController : Controller
     {

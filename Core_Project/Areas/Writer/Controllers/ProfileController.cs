@@ -33,27 +33,43 @@ namespace Core_Project.Areas.Writer.Controllers
             viewModel.Name = values.Name;
             viewModel.Surname = values.Surname;
             viewModel.PictureURL=values.ImageUrl;
+            
             return View(viewModel);
         }
-
         [HttpPost]
         public async Task<IActionResult> Index(UserUpdateViewModel p)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (p.Picture!=null)
+            if (user == null)
+            {
+                return View();
+            }
+
+            // Eğer yeni bir resim yüklenmişse, onu kaydet
+            if (p.Picture != null)
             {
                 var resource = Directory.GetCurrentDirectory();
-                var extension=Path.GetExtension(p.Picture.FileName);
-                var imageName=Guid.NewGuid()+extension;
-                var saveLocation=resource+"/wwwroot/userImages/"+imageName;
-                var stream=new FileStream(saveLocation, FileMode.Create);
-                await p.Picture.CopyToAsync(stream);
-                user!.ImageUrl = imageName;
+                var extension = Path.GetExtension(p.Picture.FileName);
+                var imageName = Guid.NewGuid() + extension;
+                var saveLocation = Path.Combine(resource, "wwwroot/userImages/", imageName);
+
+                using (var stream = new FileStream(saveLocation, FileMode.Create))
+                {
+                    await p.Picture.CopyToAsync(stream);
+                }
+
+                user.ImageUrl = imageName;
             }
-            user!.Name = p.Name;
+
+            user.Name = p.Name;
             user.Surname = p.Surname;
-            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);
-            var result=await _userManager.UpdateAsync(user);
+
+            if (!string.IsNullOrWhiteSpace(p.Password))
+            {
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);
+            }
+
+            var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Default");
@@ -61,5 +77,6 @@ namespace Core_Project.Areas.Writer.Controllers
 
             return View();
         }
+
     }
 }

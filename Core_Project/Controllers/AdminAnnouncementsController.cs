@@ -6,6 +6,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 
 namespace Core_Project.Controllers
 {
@@ -70,6 +71,14 @@ namespace Core_Project.Controllers
 
 
             }
+
+        }
+
+        public IActionResult DeleteAnnouncement(int id)
+        {
+            var announcement= announcementsMnager.TGetBYID(id);
+            announcementsMnager.TDelete(announcement);
+            return RedirectToAction("AnnouncementsList","AdminAnnouncements");
 
         }
 

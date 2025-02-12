@@ -13,7 +13,7 @@ namespace Core_Project.Controllers
         MessageManager messageManager = new MessageManager(new EFMessageDAL());
         public IActionResult Index()
         {
-            var values = messageManager.TGetList();
+            var values = messageManager.TGetList().OrderByDescending(x=>x.MessageID).ToList();
             return View(values);
         }
 
