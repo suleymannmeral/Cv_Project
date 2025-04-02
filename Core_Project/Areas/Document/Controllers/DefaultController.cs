@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using Core_Project.Areas.Document.Models;
+using Core_Project.Controllers;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,12 @@ namespace Core_Project.Areas.Document.Controllers
     public class DefaultController : Controller
     {
         DocumentManager DocumentManager = new DocumentManager(new EFDocumentDAL());
+        private readonly ILogger<DefaultController> _logger;
+
+        public DefaultController(ILogger<DefaultController> logger)
+        {
+            _logger = logger;
+        }
 
         public IActionResult Index()
         {
@@ -36,36 +43,49 @@ namespace Core_Project.Areas.Document.Controllers
         [HttpPost]
         public IActionResult AddDocument(AddDocumentsViewModel p)
         {
-            if (p.PdfFile != null && p.PdfFile.Length > 0)
+            try
             {
-                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents");
-                if (!Directory.Exists(folderPath))
+                if (p.PdfFile != null && p.PdfFile.Length > 0)
                 {
-                    Directory.CreateDirectory(folderPath);
+                    var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents");
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(p.PdfFile.FileName);
+                    var filePath = Path.Combine(folderPath, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        p.PdfFile.CopyTo(stream);
+                    }
+
+                    var document = new Documents
+                    {
+                        CourseName = p.CourseName,
+                        Title = p.Title,
+                        PdfLink = "/Documents/" + uniqueFileName
+                    };
+
+                    DocumentManager.TAdd(document);
+                    _logger.LogInformation("Belge başarıyla eklendi: {Title}", p.Title);
+
+                    return RedirectToAction("Index", "Default");
                 }
-
-                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(p.PdfFile.FileName);
-                var filePath = Path.Combine(folderPath, uniqueFileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                else
                 {
-                    p.PdfFile.CopyTo(stream);
+                    _logger.LogWarning("Dosya yüklenmedi, geçersiz giriş.");
+                    ModelState.AddModelError("", "Lütfen bir dosya seçin.");
+                    return View(p);
                 }
-
-              
-                var document = new Documents
-                {
-                    CourseName = p.CourseName,
-                    Title = p.Title,
-                    PdfLink = "/Documents/" + uniqueFileName 
-                };
-
-                DocumentManager.TAdd(document); 
-
-                return RedirectToAction("Index", "Default");
             }
-
-            return View(p);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Belge yüklenirken bir hata oluştu.");
+                ModelState.AddModelError("", "Belge yüklenirken bir hata oluştu. Lütfen tekrar deneyin.");
+                return View(p);
+            }
         }
 
 

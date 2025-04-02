@@ -45,7 +45,7 @@ namespace Core_Project.Areas.Writer.Controllers
                 return View();
             }
 
-            // Eğer yeni bir resim yüklenmişse, onu kaydet
+        
             if (p.Picture != null)
             {
                 var resource = Directory.GetCurrentDirectory();

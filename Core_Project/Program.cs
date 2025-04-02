@@ -1,4 +1,6 @@
-﻿using Core_Project;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using Core_Project;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,28 +18,22 @@ builder.Services.AddIdentity<WriterUser, WriterRole>()
     .AddDefaultTokenProviders(); // Token provider ekleniyor
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<ITelegramService, TelegramService>();
+
 
 builder.Services.AddMvc(
-    config =>
-    {
-        var policy=new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-        config.Filters.Add(new AuthorizeFilter(policy));
-    }
-    
-    );
+ );
 
-builder.Services.ConfigureApplicationCookie(
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.AccessDeniedPath = "/Error/";
+    options.LoginPath = "/Writer/Login/Index";
+});
 
-    options =>
-    {
-        options.Cookie.HttpOnly = true;
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-        options.AccessDeniedPath = "/Error/";
-        options.LoginPath = "/Writer/Login/Index";
-    }
-    );
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,6 +64,6 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.Run();

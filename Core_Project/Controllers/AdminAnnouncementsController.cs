@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using Core_Project.Models;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
@@ -17,11 +18,13 @@ namespace Core_Project.Controllers
         AnnouncementsManager announcementsMnager = new AnnouncementsManager(new EFAnnouncementsDAL());
         private readonly IEmailSender _emailSender;
         private readonly UserManager<WriterUser> _userManager;
+        private readonly ITelegramService _telegramService;
 
-        public AdminAnnouncementsController(IEmailSender emailSender, UserManager<WriterUser> userManager)
+        public AdminAnnouncementsController(IEmailSender emailSender, UserManager<WriterUser> userManager, ITelegramService telegramService)
         {
             _emailSender = emailSender;
             _userManager = userManager;
+            _telegramService = telegramService;
         }
 
         public IActionResult AnnouncementsList()
@@ -63,7 +66,8 @@ namespace Core_Project.Controllers
 
                 await Task.WhenAll(emailTasks);
 
-
+                string telegramMessage = $"📢 Yeni Duyuru!\n\n📌 *{p.Title}*\n📅 {DateTime.Now}\n📖 {p.Content}";
+                await _telegramService.SendMessageAsync(telegramMessage);
 
 
 

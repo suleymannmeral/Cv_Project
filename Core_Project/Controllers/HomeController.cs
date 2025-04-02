@@ -5,8 +5,7 @@ using System.Diagnostics;
 
 namespace Core_Project.Controllers
 {
-    [Authorize(Roles = "Admin")]
-
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
