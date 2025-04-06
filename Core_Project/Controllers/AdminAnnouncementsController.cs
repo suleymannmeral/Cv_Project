@@ -16,15 +16,15 @@ namespace Core_Project.Controllers
     public class AdminAnnouncementsController : Controller
     {
         AnnouncementsManager announcementsMnager = new AnnouncementsManager(new EFAnnouncementsDAL());
-        private readonly IEmailSender _emailSender;
+     
         private readonly UserManager<WriterUser> _userManager;
-        private readonly ITelegramService _telegramService;
+        private readonly MessageServiceFactory _messageServiceFactory;
 
-        public AdminAnnouncementsController(IEmailSender emailSender, UserManager<WriterUser> userManager, ITelegramService telegramService)
+        public AdminAnnouncementsController(IEmailSender emailSender, UserManager<WriterUser> userManager, MessageServiceFactory messageServiceFactory)
         {
-            _emailSender = emailSender;
+
             _userManager = userManager;
-            _telegramService = telegramService;
+            _messageServiceFactory = messageServiceFactory;
         }
 
         public IActionResult AnnouncementsList()
@@ -58,17 +58,18 @@ namespace Core_Project.Controllers
                 };
 
                 announcementsMnager.TAdd(announcement);
-                
-                List<string> emails = _userManager.Users.Select(x => x.Email).ToList();
 
-                var emailTasks = emails.Select(email =>
-                    _emailSender.SendEmailAsync(email, p.Title, p.Content)).ToList();
+                //List<string> emails = _userManager.Users.Select(x => x.Email).ToList();
 
-                await Task.WhenAll(emailTasks);
+                //var emailTasks = emails.Select(email =>
+                //    _emailSender.SendEmailAsync(email, p.Title, p.Content)).ToList();
 
-                string telegramMessage = $"📢 Yeni Duyuru!\n\n📌 *{p.Title}*\n📅 {DateTime.Now}\n📖 {p.Content}";
-                await _telegramService.SendMessageAsync(telegramMessage);
+                //await Task.WhenAll(emailTasks);
 
+                //string telegramMessage = $"📢 Yeni Duyuru!\n\n📌 *{p.Title}*\n📅 {DateTime.Now}\n📖 {p.Content}";
+                //await _telegramService.SendMessageAsync(telegramMessage);
+                var service = _messageServiceFactory.CreateMessageService(MessageType.Telegram);
+                await service.SendMessageAsync("deneme");
 
 
                 return RedirectToAction("Index");

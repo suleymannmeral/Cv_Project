@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ITelegramService
+    public enum MessageType
     {
-        Task SendMessageAsync(string message);
+        WhatsApp = 1,
+        Telegram = 2,
+        Email = 3
     }
+
 }

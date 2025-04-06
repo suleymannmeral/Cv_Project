@@ -18,7 +18,12 @@ builder.Services.AddIdentity<WriterUser, WriterRole>()
     .AddDefaultTokenProviders(); // Token provider ekleniyor
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-builder.Services.AddScoped<ITelegramService, TelegramService>();
+//builder.Services.AddScoped<ITelegramService, TelegramService>();
+builder.Services.AddScoped<WhatsappMessageService>();
+builder.Services.AddScoped<TelegramMessageService>();
+builder.Services.AddScoped<EmailMessageService>();
+builder.Services.AddScoped<MessageServiceFactory>();
+
 
 
 builder.Services.AddMvc(

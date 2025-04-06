@@ -1,18 +1,23 @@
 ﻿using BusinessLayer.Abstract;
 using Microsoft.Extensions.Logging;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class TelegramService : ITelegramService
+    public class TelegramMessageService : IMessageSendService
     {
-        private readonly string _botToken = "7992366461:AAEKduf-vWUiBc0OqvzF7u0up9MembbQAT4";
-        private readonly string _chatId = "-4640236751";
-        private readonly ILogger<TelegramService> _logger;
 
-        public TelegramService(ILogger<TelegramService> logger)
+        private readonly string _botToken = "7727134478:AAG-Hp_mSnfFdg78cH9oRSiEXGfDsnVapqw";
+        private readonly string _chatId = "-912123725";
+      
+
+        public TelegramMessageService()
         {
-            _logger = logger;
+           
         }
 
         public async Task SendMessageAsync(string message)
@@ -27,17 +32,20 @@ namespace BusinessLayer.Concrete
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogError("Telegram API Hatası: {StatusCode} - {Response}", response.StatusCode, responseContent);
+                   
                     throw new Exception($"Telegram API hatası: {response.StatusCode} - {responseContent}");
                 }
 
-                _logger.LogInformation("Telegram mesajı başarıyla gönderildi: {Response}", responseContent);
+                
             }
             catch (Exception ex)
             {
-                _logger.LogError("Telegram mesajı gönderilirken hata oluştu: {Message}", ex.Message);
+               
                 throw;
             }
         }
+
+      
     }
+
 }
