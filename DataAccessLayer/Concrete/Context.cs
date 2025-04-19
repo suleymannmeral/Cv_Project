@@ -14,7 +14,7 @@ namespace DataAccessLayer.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer("server=SULEYMAN;database=CoreProjectDB;integrated security=true;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("---");
 
         }
         public DbSet<About> Abouts { get; set; }
