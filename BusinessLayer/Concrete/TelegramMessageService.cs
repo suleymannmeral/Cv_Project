@@ -11,8 +11,8 @@ namespace BusinessLayer.Concrete
     public class TelegramMessageService : IMessageSendService
     {
 
-        private readonly string _botToken = "7727134478:AAG-Hp_mSnfFdg78cH9oRSiEXGfDsnVapqw";
-        private readonly string _chatId = "-912123725";
+        private readonly string _botToken = "---";
+        private readonly string _chatId = "---";
       
 
         public TelegramMessageService()
