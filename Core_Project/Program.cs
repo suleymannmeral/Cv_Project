@@ -19,9 +19,8 @@ builder.Services.AddIdentity<WriterUser, WriterRole>()
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 //builder.Services.AddScoped<ITelegramService, TelegramService>();
-builder.Services.AddScoped<WhatsappMessageService>();
+//builder.Services.AddScoped<WhatsappMessageService>();
 builder.Services.AddScoped<TelegramMessageService>();
-builder.Services.AddScoped<EmailMessageService>();
 builder.Services.AddScoped<MessageServiceFactory>();
 
 

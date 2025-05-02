@@ -3,6 +3,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Core_Project.Controllers
 {
@@ -10,6 +11,15 @@ namespace Core_Project.Controllers
 
     public class DefaultController : Controller
     {
+        private readonly IEmailSender _emailSender;
+        MessageManager messageManager = new MessageManager(new EFMessageDAL());
+
+
+        public DefaultController(IEmailSender emailSender)
+        {
+            _emailSender = emailSender;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -37,12 +47,15 @@ namespace Core_Project.Controllers
             return PartialView();
         }
         [HttpPost]
-        public JsonResult SendMessage(Message p)
+        public async Task<JsonResult> SendMessage(Message p)
         {
-            MessageManager messageManager = new MessageManager(new EFMessageDAL());
             p.Date = DateTime.Now;
             p.Status = true;
+
+          
+            string mailMessage = $"{p.Name} Adlı Kişi Bir Yeni Contact Mesajı Bıraktı. Mesaj: {p.Content}";
             messageManager.TAdd(p);
+            await _emailSender.SendEmailAsync("mrlslymn02@gmail.com", "Yeni Bir Mesajınız Var", mailMessage);
 
             return Json(new { success = true, message = "Message sent successfully!" });
         }

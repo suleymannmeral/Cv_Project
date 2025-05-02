@@ -3,8 +3,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Drawing.Text;
+
 
 namespace Core_Project.Areas.Writer.Controllers
 {
@@ -68,7 +67,7 @@ namespace Core_Project.Areas.Writer.Controllers
                 else
                 {
                     TempData["ErrorMessage"] = "Account Was Locked";
-            
+
                     await _emailSender.SendEmailAsync(user.Email!, "Account", "Account was locked");
 
                 }
@@ -103,7 +102,7 @@ namespace Core_Project.Areas.Writer.Controllers
                     Request.Scheme  
                 );
 
-                
+
                 await _emailSender.SendEmailAsync(email!, "Reset Password",
                     $"Please reset your password using this link: <a href='{resetLink}'>Reset Password</a>");
             }

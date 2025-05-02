@@ -25,8 +25,7 @@ namespace BusinessLayer.Factories
                 {
                     MessageType.WhatsApp => _serviceProvider.GetRequiredService<WhatsappMessageService>(),
                     MessageType.Telegram => _serviceProvider.GetRequiredService<TelegramMessageService>(),
-                    MessageType.Email => _serviceProvider.GetRequiredService<EmailMessageService>(),
-                    _ => throw new NotSupportedException("Geçersiz mesaj tipi.")
+                    _ => throw new NotSupportedException("Geçersiz mesaj tipi")
                 };
             }
         

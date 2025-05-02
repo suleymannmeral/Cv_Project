@@ -10,18 +10,18 @@ namespace Core_Project.Controllers
 
     public class ContactController : Controller
     {
-        //MessageManager messageManager = new MessageManager(new EFMessageDAL());
-        //public IActionResult Index()
-        //{
-        //    var values = messageManager.TGetList().OrderByDescending(x=>x.MessageID).ToList();
-        //    return View(values);
-        //}
+        MessageManager messageManager = new MessageManager(new EFMessageDAL());
+        public IActionResult Index()
+        {
+            var values = messageManager.TGetList().OrderByDescending(x => x.MessageID).ToList();
+            return View(values);
+        }
 
-        //public IActionResult DeleteContactMessage(int id)
-        //{
-        //    var values = messageManager.TGetBYID(id);
-        //    messageManager.TDelete(values);
-        //    return RedirectToAction("Index");
-        //}
+        public IActionResult DeleteContactMessage(int id)
+        {
+            var values = messageManager.TGetBYID(id);
+            messageManager.TDelete(values);
+            return RedirectToAction("Index");
+        }
     }
 }

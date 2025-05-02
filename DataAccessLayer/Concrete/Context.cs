@@ -14,7 +14,9 @@ namespace DataAccessLayer.Concrete
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
+            //optionsBuilder.UseSqlServer("Server=.\\MSSQLSERVER2022;Database=sule1877_CoreProjectDB;User Id=sule1877_user01;Password=tTTp0ng2%;TrustServerCertificate=True;");
             optionsBuilder.UseSqlServer("server=SULEYMAN;database=CoreProjectDB;integrated security=true;TrustServerCertificate=True");
+
 
         }
         public DbSet<About> Abouts { get; set; }
