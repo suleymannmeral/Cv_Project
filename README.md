@@ -186,6 +186,7 @@ Login ekranımız üzerinden kullanıcılar ve admin sisteme giriş yapabilmekte
 
  <img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/fd2acbc8-f0b4-4dcc-8851-b1c0c9aa8f0d" />
 
+<img width="1515" height="877" alt="image" src="https://github.com/user-attachments/assets/9f68137c-06f1-4f9e-8e2d-cc29678a19f4" />
 
 
 ## 💡 Ekstra Notlar
