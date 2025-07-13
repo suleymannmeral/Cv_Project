@@ -147,13 +147,16 @@ Login ekranımız üzerinden kullanıcılar ve admin sisteme giriş yapabilmekte
 
 <img width="1875" height="907" alt="image" src="https://github.com/user-attachments/assets/9f2d9b51-7bf2-48d9-b872-ad226e90ec1e" />
 
- ### Admin, duyurular sayfası üzerinden duyuru yapabilir.Bu duyurular hem kullanıcıların panelinde gözükür, hem de onlara mail yolu ile gider.
+ ### Admin, duyurular sayfası üzerinden duyuru yapabilir.Bu duyurular hem kullanıcıların panelinde gözükür, hem de onlara mail yolu ile gider. Aynı zamanda ilgili telegram gurubuna duyuru yapılır.
 
 <img width="1571" height="865" alt="image" src="https://github.com/user-attachments/assets/27987535-fe2a-47ee-b8b5-9e7c8401712f" />
 
 <img width="1582" height="863" alt="image" src="https://github.com/user-attachments/assets/8fe25942-41ea-4aab-afdc-d290b4290269" />
 
 <img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/54af0687-4708-4d95-910e-53939db5f65f" />
+
+<img width="1505" height="633" alt="image" src="https://github.com/user-attachments/assets/7aefbf1e-94ac-430a-aee5-63c91b944e67" />
+
 
  ### Admin, User sayfası üzerinden kullanıcıları yönetebilir. Kullanıcıların yanlış şifre girmesi durumunda "Access Failed Count" sayısı artar. Bu 5 olduğu zaman hesap kilitlenir. Admin tarafından açılır. Ayrıca admin kullanıcıların hesabımı kitleyip,giriş yapmalarını engelleyebilir.
 
