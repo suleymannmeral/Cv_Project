@@ -1,234 +1,379 @@
-# 📚 Kişisel Web Sitesi
+# 🌐 Kişisel Portfolio Web Sitesi
 
-Bu proje, N Katmanlı mimaride ASP.NET Core teknolojisi kullanılarak geliştirilen bir MVC projesidir. 
-Admin, Ana sayfa üzerinde bulunan hakkımda, servisler,deneyimler, iletişim kısımları üzerinde crud işlemlerini admin paneli üzerinden gerçekleştirebilmektedir. 
-Admin sisteme üye olan kullanıcılara toplu bir şekilde duyuru gönderebilmektedir. Duyuru hem kullanıcı sayfasında görüntülenebilir hem de üyelere mail yolu ile bildirilmektedir.
-Ana sayfa üzerinden admine iletişim mesajı gönderilmektedir. Mesaj admin paneli üzerinden görüntülenip aynı zamanda adminin mail adresine gönderilmektedir.
-Admin sisteme kayıtlı olan kullanıcılara ban atabilir, banı kaldırabilir ve kullanıcıları silebilir. 
-Documents sayfasında admin pdf paylaşımı yapabilmektedir.
+> ASP.NET Core MVC ile geliştirilmiş, N-Katmanlı Mimari kullanan tam özellikli dinamik kişisel CV/Portfolio web uygulaması.
 
-Detaylar görseller ile açıklanacaktır.
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet)](https://dotnet.microsoft.com/)
+[![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-MVC-blue?style=for-the-badge&logo=dotnet)](https://docs.microsoft.com/en-us/aspnet/core/)
+[![MSSQL](https://img.shields.io/badge/MSSQL-Database-CC2927?style=for-the-badge&logo=microsoftsqlserver)](https://www.microsoft.com/en-us/sql-server/)
+[![Entity Framework](https://img.shields.io/badge/Entity_Framework_Core-8.0-purple?style=for-the-badge)](https://docs.microsoft.com/en-us/ef/core/)
+
+---
+
+## 📖 Proje Hakkında
+
+Bu proje, **N-Katmanlı Mimari** (N-Layer Architecture) kullanılarak **ASP.NET Core MVC** ile geliştirilmiş bir kişisel portfolio/CV web uygulamasıdır. Admin paneli üzerinden sitenin tüm içerikleri dinamik olarak yönetilebilmektedir.
+
+### ✨ Temel Özellikler
+
+- 🔒 **Identity tabanlı kimlik doğrulama** — Kullanıcı kayıt, giriş, şifre sıfırlama
+- 👨‍💼 **Admin Paneli** — Tüm site içeriklerini yönetme (CRUD)
+- 📢 **Duyuru Sistemi** — Mail + Telegram entegrasyonu ile toplu bildirim
+- 📨 **Mesajlaşma** — Ziyaretçi → Admin ve Kullanıcılar arası mesajlaşma
+- 📄 **Doküman Yönetimi** — PDF yükleme ve paylaşım
+- 🛡️ **Kullanıcı Yönetimi** — Ban/unban, hesap kilitleme, kullanıcı silme
+- 💬 **Testimonial Sistemi** — Kullanıcı referans oluşturma
+- 📧 **E-posta Bildirimleri** — Kayıt, duyuru ve mesaj için otomatik e-posta
+- 🏭 **Factory Design Pattern** — Mesaj gönderme servisleri için
+
+---
 
 ## 🛠 Kullanılan Teknolojiler
 
-| Teknoloji              | Açıklama                                              |
-|------------------------|--------------------------------------------------------|
-| **ASP.NET Core Web API** | Projenin backend altyapısı                            |
-| **MSSQL**              | Veritabanı yönetimi için                              |
-| **Entity Framework Core** | ORM aracı olarak                                     |
-| **Identity **          | Kimlik doğrulama ve yetkilendirme işlemleri için      |
-| **AJAX & Bootstrap**   | UI tarafında dinamiklik ve responsive tasarım için    |
+| Teknoloji | Sürüm | Açıklama |
+|---|---|---|
+| **ASP.NET Core MVC** | .NET 8.0 | Ana web framework |
+| **Entity Framework Core** | 8.0.10 | ORM — Veritabanı işlemleri |
+| **ASP.NET Core Identity** | 8.0.10 | Kimlik doğrulama & yetkilendirme |
+| **MSSQL Server** | — | İlişkisel veritabanı |
+| **FluentValidation** | 11.3.0 | Model doğrulama kuralları |
+| **RestSharp** | 112.1.0 | HTTP istemcisi (Telegram API) |
+| **Newtonsoft.Json** | 13.0.3 | JSON serileştirme |
+| **Bootstrap** | — | Responsive UI tasarım |
+| **AJAX** | — | Sayfa yenilenmeden dinamik işlemler |
 
 ---
 
-## 🔐 Özellikler
+## 🏗 Mimari Yapı
+
+Proje **N-Katmanlı Mimari** prensibiyle 4 ayrı katmana bölünmüştür:
+
+```
+Core_Project.sln
+│
+├── 📦 EntityLayer          → Varlık/Model sınıfları (POCO)
+├── 📦 DataAccessLayer      → Veritabanı erişim katmanı (Repository Pattern)
+├── 📦 BusinessLayer        → İş mantığı katmanı (Services, Validations, Factories)
+└── 🌐 Core_Project         → Sunum katmanı (ASP.NET Core MVC)
+```
+
+### Katman Detayları
+
+#### 📦 EntityLayer
+Veritabanı tablolarını temsil eden model sınıflarını içerir:
+
+| Entity | Açıklama |
+|---|---|
+| `About` | Hakkımda bölümü bilgileri |
+| `Contact` | İletişim form mesajları |
+| `Education` | Eğitim bilgileri |
+| `Experience` | İş deneyimleri |
+| `Feature` | Ana sayfa özellik kartları |
+| `Message` | Kullanıcılar arası mesajlar |
+| `Portfolio` | Portföy projeleri |
+| `Service` | Sunulan hizmetler |
+| `Skill` | Beceriler |
+| `SocialMedia` | Sosyal medya linkleri |
+| `Testimonial` | Kullanıcı referansları |
+| `Announcements` | Admin duyuruları |
+| `Documents` | Paylaşılan PDF/dokümanlar |
+| `WriterUser` | Identity kullanıcı modeli |
+| `WriterRole` | Identity rol modeli |
+| `WriterMessage` | Kullanıcılar arası mesajlaşma |
+| `Todolist` | Yapılacaklar listesi |
+
+#### 📦 DataAccessLayer
+- `Context.cs` — `IdentityDbContext<WriterUser, WriterRole, int>` ile EF Core DbContext
+- `Repository/` — Generic repository pattern implementasyonu
+- `EntityFramework/` — Her entity için EF tabanlı DAL sınıfları (16 adet)
+- `Abstract/` — DAL arayüzleri
+- `Migrations/` — Veritabanı migration dosyaları
+
+#### 📦 BusinessLayer
+- `Abstract/` — Servis arayüzleri (IGenericService dahil 18 adet)
+- `Concrete/` — Servis implementasyonları
+- `ValidationRules/` — FluentValidation ile doğrulama kuralları
+- `Factories/` — Factory Design Pattern implementasyonu
+
+**Factory Design Pattern:**
+```csharp
+// MessageServiceFactory — Mesaj servisini tip bazlı oluşturur
+public IMessageSendService CreateMessageService(MessageType type)
+{
+    return type switch
+    {
+        MessageType.Telegram => _serviceProvider.GetRequiredService<TelegramMessageService>(),
+        MessageType.WhatsApp => _serviceProvider.GetRequiredService<WhatsappMessageService>(),
+        _ => throw new NotSupportedException("Geçersiz mesaj tipi")
+    };
+}
+```
+
+#### 🌐 Core_Project (Sunum Katmanı)
+- `Controllers/` — 20 adet MVC controller (admin + genel)
+- `Areas/Writer/` — Kimlik doğrulama alanı (Login, Register, Profile, Dashboard, Mesajlaşma)
+- `Areas/Document/` — Doküman yönetim alanı
+- `ViewComponents/` — Yeniden kullanılabilir view bileşenleri
+- `Views/` — Razor view dosyaları
+- `wwwroot/` — Statik dosyalar (CSS, JS, Görseller)
+- `EmailSender.cs` — E-posta gönderme servisi
+
+---
+
+## 🔐 Özellikler Detayı
 
 ### 👤 Kullanıcı İşlemleri
-- Kullanıcı kayıt ve giriş
-- Mesaj Gönderme
-- Testimonials Ekleme
+
+| Özellik | Açıklama |
+|---|---|
+| Kayıt (Register) | Yeni üye kaydı; başarılı olursa e-posta ile bilgilendirme |
+| Giriş (Login) | Identity tabanlı cookie authentication |
+| Şifre Sıfırlama | Kullanıcı adı ile şifre sıfırlama linki e-posta ile gönderilir |
+| Profil Yönetimi | Profil güncelleme ve resim yükleme |
+| Testimonial | Referans/yorum oluşturma |
+| Mesajlaşma | Diğer kullanıcılara mesaj gönderme/alma |
+| Duyurular | Admin tarafından yayımlanan duyuruları görüntüleme |
 
 ### 🔐 Admin Paneli
-- Ana sayfadaki bölümleri dinamik olarak değiştirebilme.
-- Kullanıcı yönetimi
-- Duyuru Yapabilme
 
-## 📌 Notlar
+| Özellik | Açıklama |
+|---|---|
+| İçerik Yönetimi | Hakkımda, Servisler, Deneyimler, Eğitim, Beceriler, Portföy CRUD |
+| İletişim Mesajları | Anasayfadan gelen mesajlar; admin'e e-posta bildirimi |
+| Duyuru Sistemi | Duyuru oluşturma → Tüm üyelere e-posta + Telegram bildirimi |
+| Kullanıcı Yönetimi | Kullanıcı listeleme, ban/unban, hesap kilitleme, silme |
+| Doküman Yönetimi | PDF yükleme, listeleme ve silme |
+| Testimonial Yönetimi | Kullanıcı referanslarını görüntüleme ve silme |
 
-- Proje `N KATMANLI MİMARİ` yapısında modüler olarak organize edilmiştir.
-- Bu projeyi geliştirdiğim tarihte çok fazla teknik yetkinliğim olmadığı için solid prensipleri, clean code yaklaşımları ezilmiş olabilir.
-- İletişim yöntemleri için Factory Design patternı öğrenmek adına bu design pattern uygulanmaya çalışılmıştır.
+### 🛡 Güvenlik
+
+- 5 başarısız giriş denemesinde hesap otomatik kilitlenir
+- Kilitli hesaplar yalnızca admin tarafından açılabilir
+- Admin kullanıcıları manuel olarak ban'layabilir
+- Cookie tabanlı güvenli oturum yönetimi (`HttpOnly`, `SecurePolicy: Always`)
+- Rol tabanlı yetkilendirme (Admin / Writer rolleri)
+- Hata sayfası yönlendirmesi (`/Error/{statusCode}`)
 
 ---
 
-PROJE Görselleri ve Detayları: 
-(Tasarım bana ait değildir. Hazır bir bootstrap template'i kullanılmıştır. Üzerinde değişiklik yapılmıştır)
-<img width="1883" height="911" alt="image" src="https://github.com/user-attachments/assets/07a092c5-d465-4a5d-958d-606f33d74f14" />
-<img width="1870" height="907" alt="image" src="https://github.com/user-attachments/assets/dee2d624-95d7-40ae-a403-d1efbef216f1" />
-<img width="1885" height="732" alt="image" src="https://github.com/user-attachments/assets/26b6808c-37ff-4d53-810f-d0f2d1a93480" />
-<img width="1882" height="612" alt="image" src="https://github.com/user-attachments/assets/c50b3298-2a40-4689-8a67-a2c27ec09c0e" />
-<img width="1867" height="902" alt="image" src="https://github.com/user-attachments/assets/801e2fd8-98fd-4a26-b23b-9eee50f8d69d" />
-<img width="1882" height="663" alt="image" src="https://github.com/user-attachments/assets/01de6a39-2333-4fe6-ab0b-4af798302f1a" />
-<img width="1903" height="715" alt="image" src="https://github.com/user-attachments/assets/a33024a7-661d-46e3-b186-77191ddce365" />
-
-
-
-Projenin ana sayfası bu şekildedir. Görüntülen her alanı admin paneli üzerinden değiştirebilmekteyiz.
-
-<img width="1903" height="915" alt="image" src="https://github.com/user-attachments/assets/0149c1fa-cb79-4fa0-8009-e0fc97795c81" />
-
-Login ekranımız üzerinden kullanıcılar ve admin sisteme giriş yapabilmektedir.
-<img width="1885" height="897" alt="image" src="https://github.com/user-attachments/assets/c1660a35-0fc1-4980-a839-67ee7b7f72a8" />
-
- Kullanıcılar şifrelerini unuttuğu taktirder kullanıcı adlarını girerek, mail adreslerine şifre değiştirme linki gönderilmektedir.
-
- <img width="1887" height="900" alt="image" src="https://github.com/user-attachments/assets/34914064-d822-4a14-9a23-c89a16850773" />
-
- ### - Yeni üyeler register sayfasından kayıt olabilmektedirler. Kayıt başarılı olduğunda mail yoluyla bilgilendirilirler.
-
- <img width="1202" height="725" alt="image" src="https://github.com/user-attachments/assets/3f03f7fc-6971-438d-b4a4-1f297ad2ae76" />
-
-### - Kullanıcılar aynı kullanıcı adını alamamaktadırlar. Bu yapı Identity kütüphanesi ile kurulmuştur.
-
-<img width="652" height="178" alt="image" src="https://github.com/user-attachments/assets/cdfb0c27-177c-4612-8184-6b399efd8332" />
-
-### - Kayıt başarılı ise mail adresinize mail gelmektedir.
-
-<img width="1888" height="793" alt="image" src="https://github.com/user-attachments/assets/0f923917-f20f-46fb-aaad-5ac85f12456d" />
-
-### - Giriş yapan kullanıcıları böle bir dashboard karşılamaktadır. Panel üzerinden çeşitli işlemler gerçekleştirebilemktedirler.
-
-
- <img width="1898" height="912" alt="image" src="https://github.com/user-attachments/assets/fd1a1bf8-1491-4681-9afb-c9d6200fee60" />
-
- ### "Received Messages" sayfası üzerinden kullanıcılar kendilerine gönderilen mesajları görebilmektedirler.
-
- <img width="1902" height="913" alt="image" src="https://github.com/user-attachments/assets/3fab15bd-3dc9-4c99-b768-494e8702d060" />
- 
-<img width="1902" height="901" alt="image" src="https://github.com/user-attachments/assets/c3f19d07-76d6-4232-94f2-60808774705a" />
-
- ### "Create Message" sayfası üzerinden kullanıcılar mesaj gönderebilmektedirler.
-
-<img width="1897" height="912" alt="image" src="https://github.com/user-attachments/assets/d5146e0f-e46c-4a59-a97b-c26fadc0d5bd" />
-
- ### "Sent Messages" sayfası üzerinden kullanıcılar gönderdikleri  mesajı gönderebilmektedirler.
-
-<img width="1896" height="898" alt="image" src="https://github.com/user-attachments/assets/34592faf-f51d-44f8-a55d-6574fd5423ba" />
-
- ### "Announcements" sayfası üzerinden kullanıcılar adminin yaptığı duyuruları görüntüleyebilmektedir.
-
-<img width="1897" height="898" alt="image" src="https://github.com/user-attachments/assets/08646a17-541f-4711-a993-ad7543d6af17" />
-
-<img width="1907" height="953" alt="image" src="https://github.com/user-attachments/assets/a2d750ea-b7fb-4cf4-a823-398e4a7f35fb" />
-
- ### "Profile" sayfası üzerinden kullanıcılar profilleri üzerinden işlemler yapabilmektedirler.
-
-<img width="1881" height="915" alt="image" src="https://github.com/user-attachments/assets/16aa44b9-946c-424f-8d25-6749fbb4f8f9" />
-
- ### "Testimonial" sayfası üzerinden kullanıcılar referans oluşturabilir. Bunu homepage üzerinden görebiliriz.
-
-<img width="1907" height="902" alt="image" src="https://github.com/user-attachments/assets/811cbeac-baf2-44c9-8fd6-47755c60b83e" />
-
-<img width="1872" height="557" alt="image" src="https://github.com/user-attachments/assets/fa790109-ddd1-41e9-8e15-660b6d8e303d" />
-
-
- ### Admin sisteme giriş yaptığından ona özel olarak admin paneli yer almaktadır.Bu link üzerinden admin paneline erişebilir.
-
-<img width="1867" height="787" alt="image" src="https://github.com/user-attachments/assets/e3560ed3-3019-4d93-bdc5-c02e9ed8059a" />
-
-
- ### Anasayfada yer alan bilgileri admin, panel üzerinden değiştirebilmektedir.
-
-<img width="1873" height="906" alt="image" src="https://github.com/user-attachments/assets/8d09d214-272e-46ce-ae3e-99c50a59180a" />
-
- ### Anasayfada yer alan contact kısmından mesaj gönderen ziyaretçilerin mesajları "contact messages" kısmından görüntülenebilir.Ayrıca bu mesaj admine bildirim olarak gitmektedir.
- 
-<img width="1862" height="832" alt="image" src="https://github.com/user-attachments/assets/2ef31d79-c02a-456b-b689-f2365e560792" />
-
-<img width="1795" height="841" alt="image" src="https://github.com/user-attachments/assets/eaaa4115-8c18-4f09-9428-1470744b004a" />
-
-<img width="1568" height="777" alt="image" src="https://github.com/user-attachments/assets/ad80e492-c0a3-456a-89d3-39b50881637b" />
-
-<img width="1570" height="548" alt="image" src="https://github.com/user-attachments/assets/6b118cb6-7fdc-48ea-9016-6ae9f89b9703" />
-
- ### Anasayfada yer alan documents alanını admin, panel üzerinden yönetebilir. Yeni dosyalar ekleyebilir.
-
-<img width="1895" height="652" alt="image" src="https://github.com/user-attachments/assets/c4907bbc-4df5-400f-a0fa-ca9b5865ab2d" />
-
-<img width="1585" height="871" alt="image" src="https://github.com/user-attachments/assets/c4707444-66a0-4a81-bfdb-1c26f825170c" />
-
-<img width="1571" height="857" alt="image" src="https://github.com/user-attachments/assets/af899a34-daa1-4f73-a0bb-8e7ea19aa48a" />
-
-<img width="1571" height="717" alt="image" src="https://github.com/user-attachments/assets/de677acd-601e-4bdc-b18a-b9b4faa0c942" />
-
-<img width="1888" height="697" alt="image" src="https://github.com/user-attachments/assets/75945213-dc81-40b0-96cf-865cc6998749" />
-
-<img width="1888" height="622" alt="image" src="https://github.com/user-attachments/assets/822d9525-3093-4f15-bfa8-c054122119f8" />
-
-<img width="1875" height="907" alt="image" src="https://github.com/user-attachments/assets/9f2d9b51-7bf2-48d9-b872-ad226e90ec1e" />
-
- ### Admin, duyurular sayfası üzerinden duyuru yapabilir.Bu duyurular hem kullanıcıların panelinde gözükür, hem de onlara mail yolu ile gider. Aynı zamanda ilgili telegram gurubuna duyuru yapılır.
-
-<img width="1571" height="865" alt="image" src="https://github.com/user-attachments/assets/27987535-fe2a-47ee-b8b5-9e7c8401712f" />
-
-<img width="1582" height="863" alt="image" src="https://github.com/user-attachments/assets/8fe25942-41ea-4aab-afdc-d290b4290269" />
-
-<img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/54af0687-4708-4d95-910e-53939db5f65f" />
-
-<img width="1505" height="633" alt="image" src="https://github.com/user-attachments/assets/7aefbf1e-94ac-430a-aee5-63c91b944e67" />
-
-
- ### Admin, User sayfası üzerinden kullanıcıları yönetebilir. Kullanıcıların yanlış şifre girmesi durumunda "Access Failed Count" sayısı artar. Bu 5 olduğu zaman hesap kilitlenir. Admin tarafından açılır. Ayrıca admin kullanıcıların hesabımı kitleyip,giriş yapmalarını engelleyebilir.
-
-<img width="1570" height="783" alt="image" src="https://github.com/user-attachments/assets/1581a546-9bb9-4b42-a42b-c423e3676345" />
-
-<img width="1903" height="891" alt="image" src="https://github.com/user-attachments/assets/cba10d69-bd5e-4104-8fb3-c5d4b9eecc14" />
-
-<img width="1532" height="97" alt="image" src="https://github.com/user-attachments/assets/e0c52b7c-9139-4fc4-be08-3f0d633dfc43" />
-
-<img width="1523" height="86" alt="image" src="https://github.com/user-attachments/assets/c9172e04-cda6-477a-8a65-cecd1a680d87" />
-
-<img width="1895" height="900" alt="image" src="https://github.com/user-attachments/assets/30fc2c28-d302-42a7-b365-57c0b44601c8" />
-
-<img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/7e86d5dc-3460-4cec-b01f-15bce728742d" />
-
- ### Admin, banı kaldırdığı anda kullanııc tekrar sisteme giriş yapabilir.
-
- <img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/7af02319-f798-4c1a-83f8-0230ee7770da" />
-
- 
- ### Admin, yazılan referansalrı görüntüleyebilir ve silebilir.
-
- <img width="1587" height="738" alt="image" src="https://github.com/user-attachments/assets/1aa748fc-454f-44b6-9a2f-607f4a7d3d12" />
- 
- <img width="1553" height="847" alt="image" src="https://github.com/user-attachments/assets/28141a73-7631-4081-ac76-c0e607187c32" />
-
- ### Kullanıcılar şifrelerini unuttukları zaman şifrelerini sıfırlama linki alırlar.
-
- <img width="1907" height="893" alt="image" src="https://github.com/user-attachments/assets/b6b97272-b537-4ef3-ae06-9b971dd36f12" />
-
- <img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/fd2acbc8-f0b4-4dcc-8851-b1c0c9aa8f0d" />
-
-<img width="1515" height="877" alt="image" src="https://github.com/user-attachments/assets/9f68137c-06f1-4f9e-8e2d-cc29678a19f4" />
-
-
-## 💡 Ekstra Notlar
-
-- Bu proje, **ASP.NET Core ile geliştirdiğim ilk projedir. Bu yüzden mimari yapısı ve kod kalitesi için iyi seviye olduğu söylenemez **.
-- Clean Architecture, SOLID prensipleri, Low Coupling & High Cohesion gibi mimari prensipler uygulanıp daha iyi hale getirilebilir.
-- Kodları yorumlayıp anlayabilen (Kod okuyabilmek yazmak kadar önemlidir) her geliştirici adayı projeyi istediği şekilde kullanabilir. 🤝
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 📁 Proje Yapısı
+
+```
+Cv_Project/
+│
+├── Core_Project.sln                 # Çözüm dosyası
+│
+├── EntityLayer/
+│   └── Concrete/                    # 17 entity sınıfı
+│
+├── DataAccessLayer/
+│   ├── Concrete/Context.cs          # EF Core DbContext (IdentityDbContext)
+│   ├── Abstract/                    # DAL arayüzleri
+│   ├── EntityFramework/             # 16 EF DAL implementasyonu
+│   ├── Repository/                  # Generic Repository
+│   └── Migrations/                  # DB Migration dosyaları
+│
+├── BusinessLayer/
+│   ├── Abstract/                    # 18 servis arayüzü
+│   ├── Concrete/                    # Servis implementasyonları
+│   ├── Factories/
+│   │   └── MessageServiceFactory.cs # Factory Design Pattern
+│   └── ValidationRules/             # FluentValidation kuralları
+│
+└── Core_Project/                    # Ana MVC Projesi
+    ├── Controllers/                 # 20 MVC Controller
+    │   ├── AboutController.cs
+    │   ├── AdminAnnouncementsController.cs
+    │   ├── AdminDashboardController.cs
+    │   ├── AdminMessageController.cs
+    │   ├── AdminUserController.cs
+    │   ├── ContactController.cs
+    │   ├── DocumentController.cs
+    │   ├── EducationController.cs
+    │   ├── ExperienceController.cs
+    │   ├── PortfolioController.cs
+    │   ├── ServicesController.cs
+    │   ├── SkillController.cs
+    │   └── ...
+    ├── Areas/
+    │   ├── Writer/                  # Kullanıcı/Auth alanı
+    │   │   ├── Controllers/
+    │   │   │   ├── LoginController.cs
+    │   │   │   ├── RegisterController.cs
+    │   │   │   ├── ProfileController.cs
+    │   │   │   ├── MessageController.cs
+    │   │   │   ├── WriterDashboardController.cs
+    │   │   │   └── WriterTestimonialController.cs
+    │   │   └── Views/
+    │   └── Document/                # Doküman yönetim alanı
+    ├── EmailSender.cs               # E-posta servisi
+    ├── Program.cs                   # DI konfigürasyonu ve middleware
+    ├── Views/                       # Razor Views
+    ├── ViewComponents/              # View Components
+    └── wwwroot/                     # Statik dosyalar
+```
+
+---
+
+## 🚀 Kurulum ve Çalıştırma
+
+### Gereksinimler
+
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (LocalDB veya Express yeterlidir)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) veya [VS Code](https://code.visualstudio.com/)
+
+### Adımlar
+
+1. **Repoyu klonlayın:**
+   ```bash
+   git clone <repo-url>
+   cd Cv_Project
+   ```
+
+2. **Veritabanı bağlantı dizesini düzenleyin:**
+
+   `DataAccessLayer/Concrete/Context.cs` dosyasında bağlantı dizesini kendi SQL Server bilgilerinize göre güncelleyin:
+   ```csharp
+   optionsBuilder.UseSqlServer("Server=.;Database=CoreProjectDB;Integrated Security=True;TrustServerCertificate=True");
+   ```
+
+3. **Migration'ları uygulayın:**
+   ```bash
+   cd Core_Project
+   dotnet ef database update
+   ```
+   veya Visual Studio'da **Package Manager Console**'da:
+   ```powershell
+   Update-Database
+   ```
+
+4. **E-posta ayarlarını yapılandırın:**
+
+   `appsettings.json` dosyasına SMTP bilgilerinizi ekleyin:
+   ```json
+   {
+     "EmailSettings": {
+       "SmtpServer": "smtp.gmail.com",
+       "SmtpPort": 587,
+       "SenderEmail": "your-email@gmail.com",
+       "SenderPassword": "your-app-password"
+     }
+   }
+   ```
+
+5. **Projeyi çalıştırın:**
+   ```bash
+   dotnet run --project Core_Project
+   ```
+   veya Visual Studio'da `F5`.
+
+---
+
+## 🏭 Design Pattern
+
+### Factory Pattern — Mesaj Servisleri
+
+İletişim kanallarını soyutlamak için **Factory Design Pattern** uygulanmıştır. Yeni bir mesajlaşma kanalı eklemek (WhatsApp, SMS vb.) mevcut kodu değiştirmeden yapılabilir:
+
+```csharp
+// Kullanım
+var service = _messageServiceFactory.CreateMessageService(MessageType.Telegram);
+await service.SendAsync(message);
+```
+
+Şu an desteklenen kanallar:
+- 📱 **Telegram** — `TelegramMessageService` (aktif)
+- 💬 **WhatsApp** — `WhatsappMessageService` (altyapı hazır)
+
+---
+
+## 🗄 Veritabanı Şeması
+
+`Context` sınıfı `IdentityDbContext<WriterUser, WriterRole, int>` üzerinde türemektedir. Aşağıdaki tablolar mevcuttur:
+
+| Tablo | Açıklama |
+|---|---|
+| `AspNetUsers` | Identity kullanıcı tablosu |
+| `AspNetRoles` | Identity rol tablosu |
+| `Abouts` | Hakkımda içeriği |
+| `Contacts` | İletişim formu mesajları |
+| `Educations` | Eğitim kayıtları |
+| `Experiences` | Deneyim kayıtları |
+| `Features` | Özellik kartları |
+| `Messages` | Kullanıcılar arası mesajlar |
+| `Portfolios` | Portfolio projeleri |
+| `Services` | Sunulan hizmetler |
+| `Skills` | Beceriler |
+| `SocialMedias` | Sosyal medya linkleri |
+| `Testimonials` | Referanslar |
+| `Announcements` | Duyurular |
+| `Documents` | Yüklenen dokümanlar |
+| `WriterMessage` | Kullanıcı mesajları |
+| `Todolist` | Yapılacaklar |
+
+---
+
+## 📝 Proje Görselleri
+
+<details>
+<summary>🖼 Görselleri Göster/Gizle</summary>
+
+### Ana Sayfa
+<img width="1883" alt="Ana Sayfa" src="https://github.com/user-attachments/assets/07a092c5-d465-4a5d-958d-606f33d74f14" />
+<img width="1870" alt="Ana Sayfa 2" src="https://github.com/user-attachments/assets/dee2d624-95d7-40ae-a403-d1efbef216f1" />
+<img width="1885" alt="Ana Sayfa 3" src="https://github.com/user-attachments/assets/26b6808c-37ff-4d53-810f-d0f2d1a93480" />
+
+### Giriş / Kayıt Ekranları
+<img width="1885" alt="Login" src="https://github.com/user-attachments/assets/c1660a35-0fc1-4980-a839-67ee7b7f72a8" />
+<img width="1887" alt="Şifre Sıfırlama" src="https://github.com/user-attachments/assets/34914064-d822-4a14-9a23-c89a16850773" />
+<img width="1202" alt="Kayıt" src="https://github.com/user-attachments/assets/3f03f7fc-6971-438d-b4a4-1f297ad2ae76" />
+<img width="1888" alt="Kayıt E-posta" src="https://github.com/user-attachments/assets/0f923917-f20f-46fb-aaad-5ac85f12456d" />
+
+### Kullanıcı Paneli
+<img width="1898" alt="Kullanıcı Dashboard" src="https://github.com/user-attachments/assets/fd1a1bf8-1491-4681-9afb-c9d6200fee60" />
+<img width="1902" alt="Gelen Mesajlar" src="https://github.com/user-attachments/assets/3fab15bd-3dc9-4c99-b768-494e8702d060" />
+<img width="1897" alt="Mesaj Oluşturma" src="https://github.com/user-attachments/assets/d5146e0f-e46c-4a59-a97b-c26fadc0d5bd" />
+<img width="1897" alt="Duyurular" src="https://github.com/user-attachments/assets/08646a17-541f-4711-a993-ad7543d6af17" />
+<img width="1881" alt="Profil" src="https://github.com/user-attachments/assets/16aa44b9-946c-424f-8d25-6749fbb4f8f9" />
+<img width="1907" alt="Testimonial" src="https://github.com/user-attachments/assets/811cbeac-baf2-44c9-8fd6-47755c60b83e" />
+
+### Admin Paneli
+<img width="1867" alt="Admin Panel" src="https://github.com/user-attachments/assets/e3560ed3-3019-4d93-bdc5-c02e9ed8059a" />
+<img width="1873" alt="İçerik Yönetimi" src="https://github.com/user-attachments/assets/8d09d214-272e-46ce-ae3e-99c50a59180a" />
+<img width="1862" alt="İletişim Mesajları" src="https://github.com/user-attachments/assets/2ef31d79-c02a-456b-b689-f2365e560792" />
+<img width="1571" alt="Duyuru Yönetimi" src="https://github.com/user-attachments/assets/27987535-fe2a-47ee-b8b5-9e7c8401712f" />
+<img width="1570" alt="Kullanıcı Yönetimi" src="https://github.com/user-attachments/assets/1581a546-9bb9-4b42-a42b-c423e3676345" />
+<img width="1895" alt="Doküman Yönetimi" src="https://github.com/user-attachments/assets/c4907bbc-4df5-400f-a0fa-ca9b5865ab2d" />
+
+</details>
+
+---
+
+## 💡 Notlar ve Geliştirme Önerileri
+
+> **Not:** Bu proje, ASP.NET Core ile geliştirilmiş ilk projelerden biridir. Aşağıdaki iyileştirmeler yapılabilir:
+
+| İyileştirme | Açıklama |
+|---|---|
+| **Clean Architecture** | Domain/Application/Infrastructure katman ayrımı |
+| **SOLID Prensipleri** | Single Responsibility, Dependency Inversion uygulaması |
+| **Generic Repository** | Daha soyut bir repository implementasyonu |
+| **Bağlantı Dizesi** | `appsettings.json` üzerinden yapılandırma (hardcoded yerine) |
+| **JWT Auth** | API projesi için JWT tabanlı kimlik doğrulama |
+| **Unit Testler** | xUnit/NUnit ile test kapsamı |
+| **Docker Desteği** | Containerization |
+| **Logging** | Serilog/NLog ile kapsamlı loglama |
+
+> **Tasarım Notu:** Ön yüz tasarımı bir Bootstrap template'i üzerine özelleştirilmiştir. Tasarımın orijinal sahipliği template geliştiricisine aittir.
+
+---
 
 ## 📬 İletişim
 
-Her türlü soru, görüş veya öneriniz için bana GitHub üzerinden ulaşabilirsiniz.
+Her türlü soru, görüş veya katkı için GitHub üzerinden ulaşabilirsiniz.
 
 ---
+
+<div align="center">
+  <sub>⭐ Beğendiyseniz yıldızlamayı unutmayın!</sub>
+</div>
